@@ -88,13 +88,13 @@ def save_comparison_figure(
     subj_stem: str,
     out_dir: Path,
 ) -> list[Path]:
-    """同一位置 HR / Sinc / |误差| 三行，列=Coronal、Sagittal（含退化轴）。"""
+    """同一位置 HR / Sinc / |误差| 三行，列=Coronal、Axial（含退化轴）。"""
     out_paths = []
     out_dir.mkdir(parents=True, exist_ok=True)
-    # canonical 轴: 0=R, 1=A, 2=S。退化轴 R，包含 R 的两个正交面是 coronal(R-A) 与 sagittal(R-S)
+    # canonical 轴: 0=R, 1=A, 2=S。退化轴 R，包含 R 的两个正交面是 coronal(R-S, fix A) 与 axial(R-A, fix S)
     views = {
-        "coronal": (1, {"x_axis": "R", "y_axis": "S"}),   # 切面垂直于 A，包含 R
-        "sagittal": (2, {"x_axis": "A", "y_axis": "S"}),  # 切面垂直于 R，包含 R
+        "coronal": (1, {"x_axis": "R", "y_axis": "S"}),   # fix A -> R-S 平面 = coronal
+        "axial": (2, {"x_axis": "R", "y_axis": "A"}),     # fix S -> R-A 平面 = axial
     }
     hr_d = _display(hr)
     sinc_d = _display(sinc)

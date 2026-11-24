@@ -76,6 +76,14 @@ def mse(ref: np.ndarray, test: np.ndarray, mask: np.ndarray) -> float:
     return float(np.mean((r[mask] - t[mask]) ** 2))
 
 
+def mae(ref: np.ndarray, test: np.ndarray, mask: np.ndarray) -> float:
+    """脑组织区域的平均绝对误差（MAE = mean |ref - test|）。"""
+    _check_alignment(ref, test, mask)
+    r = np.asarray(ref, dtype=np.float64)
+    t = np.asarray(test, dtype=np.float64)
+    return float(np.mean(np.abs(r[mask] - t[mask])))
+
+
 def psnr(ref: np.ndarray, test: np.ndarray, mask: np.ndarray) -> float:
     """脑组织区域的峰值信噪比（dB）。
 
@@ -185,8 +193,12 @@ def evaluate_with_edge(
     *,
     win_size: int = 7,
 ) -> dict:
-    """PSNR / SSIM / MAE / 边缘误差 一次算齐。"""
+    """PSNR / SSIM / MAE / 边缘误差 一次算齐。
+
+    注意：Day 4 曾把 ``mse ** 0.5``（即 RMSE）误标为 ``mae``，Day 6 已修正为
+    真正的平均绝对误差 ``mean |ref - test|``；PSNR/SSIM/Gradient MAE 不受影响。
+    """
     base = evaluate(ref, test, mask, win_size=win_size)
-    base["mae"] = float(base["mse"] ** 0.5)
+    base["mae"] = mae(ref, test, mask)
     base["gradient_mae"] = gradient_mae(ref, test, mask)
     return base

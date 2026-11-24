@@ -76,8 +76,9 @@ def save_comparison_figure(
     disp = {k: _apply_window(v, lo, hi) for k, v in images.items()}
 
     views = {
+        # canonical RAS+：fix A(axis1) -> R-S 平面 = coronal；fix S(axis2) -> R-A 平面 = axial
         "coronal": (1, axis_names[0] + "-" + axis_names[2]),
-        "sagittal": (2, axis_names[1] + "-" + axis_names[2]),
+        "axial": (2, axis_names[0] + "-" + axis_names[1]),
     }
     out_paths = []
     names = ["HR"] + list(disp.keys())

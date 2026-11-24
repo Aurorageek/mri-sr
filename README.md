@@ -530,16 +530,20 @@ tensorboard --logdir .\results\tensorboard --port 6006
 
 | Method | PSNR (dB) | SSIM | MAE | GradMAE（边缘误差） |
 |---|---:|---:|---:|---:|
-| Sinc | 30.50 ± 2.19 | 0.9291 | 104.0 | 489.96 |
-| SMORE-L1 | 30.81 ± 2.28 | 0.9338 | 100.3 | 375.77 |
-| SMORE-Grad (λ=0.10) | 30.82 ± 2.28 | 0.9340 | 100.2 | 374.94 |
+| Sinc | 30.50 ± 2.19 | 0.9291 | 68.80 | 489.96 |
+| SMORE-L1 | 30.81 ± 2.28 | 0.9338 | 64.18 | 375.77 |
+| SMORE-Grad (λ=0.10) | 30.82 ± 2.28 | 0.9340 | 64.11 | 374.94 |
+
+> 注：MAE 为 **mean absolute error**（Day 6 修正；此前误用 `mse**0.5`=RMSE，
+> 详见第 14 节）。
 
 配对差异（Wilcoxon signed-rank，n=8）：
 
 - SMORE-L1 vs Sinc：ΔPSNR **+0.316 dB**（p=0.008），ΔSSIM **+0.0047**（p=0.008），
-  ΔGradMAE **-114.2**（p=0.008，即边缘误差 -23%）→ **显著且一致优于 Sinc**。
-- SMORE-Grad vs SMORE-L1：ΔPSNR +0.007 dB（p=0.016），ΔGradMAE -0.83（p=0.039）
-  → 统计上可检出，但**幅度极小、无实际意义**。
+  ΔMAE **-4.63**（p=0.008），ΔGradMAE **-114.2**（p=0.008，即边缘误差 -23%）
+  → **显著且一致优于 Sinc**。
+- SMORE-Grad vs SMORE-L1：ΔPSNR +0.007 dB（p=0.016），ΔMAE -0.07（p=0.008），
+  ΔGradMAE -0.83（p=0.039）→ 统计上可检出，但**幅度极小、无实际意义**。
 
 ### 13.3 研究结论（诚实）
 
@@ -568,3 +572,20 @@ python scripts/train_smore.py --loss l1_grad --lambda-grad 0.10 --g-path data/pr
 python scripts/eval_multisubject.py --subjects <8 个测试受试者>
 python scripts/analyze_structure.py --subject IXI016-Guys-0697-T1
 ```
+
+---
+
+## 14. Day 6：科研审查与正确性修正
+
+完整审查见 `DAY6_REPORT.md`。本次审查发现并修复两处问题：
+
+1. **MAE 曾被误算为 RMSE**：`src/metrics.py` 中 `mae = mse ** 0.5` 实为 RMSE，
+   已在 Day 6 修正为真正的 `mean |ref - test|`。受影响：Day 4/5 报告的 "MAE" 列
+   （PSNR/SSIM/GradMAE 不受影响）。Day 5 指标已用真实 MAE 重算。
+2. **切面命名错误**：canonical RAS+ 下 `fix S(axis2)` 是 **Axial（轴状面）**，此前
+   可视化脚本误标为 "sagittal（矢状面）"。已修正 `eval_interpolation.py`、
+   `eval_smore.py`、`analyze_structure.py` 的标签，并重生成 Day 5 结构保真图
+   （`*_axial_*.png`）。只影响可视化标签，不影响任何 3D 指标。
+
+其余正确性检查（退化轴=R、无 HR 泄漏、统一评价协议、λ 在开发集选择）均通过，
+详见 `DAY6_REPORT.md` 第 9 节。

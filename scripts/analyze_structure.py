@@ -85,7 +85,8 @@ def main(argv=None) -> int:
     hr_d = _apply(hr, lo, hi)
     disp = {k: _apply(v, lo, hi) for k, v in methods.items()}
 
-    views = {"coronal": 1, "sagittal": 2}
+    # canonical RAS+：fix A(axis1) -> coronal(R-S)；fix S(axis2) -> axial(R-A)
+    views = {"coronal": 1, "axial": 2}
     out_dir = args.out_dir
     out_dir.mkdir(parents=True, exist_ok=True)
 

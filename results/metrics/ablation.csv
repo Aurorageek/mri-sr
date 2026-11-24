@@ -1,5 +1,5 @@
 metric,smore_l1_minus_sinc_mean,smore_grad_minus_smore_l1_mean,wilcoxon_smore_l1_vs_sinc_p,wilcoxon_smore_grad_vs_smore_l1_p,n_pairs
 psnr_db,0.3162,0.0072,0.0078125,0.015625,8
 ssim,0.0047,0.0001,0.0078125,0.078125,8
-mae,-3.7238,-0.0843,0.0078125,0.015625,8
+mae,-4.6259,-0.0698,0.0078125,0.0078125,8
 gradient_mae,-114.1954,-0.83,0.0078125,0.0390625,8
