@@ -4,30 +4,36 @@
 
 ## 当前阶段
 
-第二阶段：发现问题（方向 A 退化算子对齐的数值分析）
+第三阶段完成：已发现并验证一个具有研究价值的改进（多退化鲁棒训练）。
 
-## 已完成
+## 主要研究发现
 
-- [x] 项目审查（代码、Day 6 报告、结果、Git 历史）
-- [x] 修复评价指标：`scipy.ndimage.sobel` 默认 axis=-1 只算 S 轴 → 新增正确的
-      through-plane 梯度误差（R 轴）与 3D 梯度误差（含 voxel spacing）
-- [x] 用斜坡数组验证梯度方向正确性
-- [x] 用现有重建结果重算指标（无需重训）：SMORE-L1 vs Sinc 的 through-plane
-      误差 -9.7%、3D 梯度误差 -20%（p=0.008）
-- [x] 冻结 Day 1–6 基线（main commit `8b2f42c`）
-- [x] 建立 improvements/ 研究目录与协议
+1. **评价指标 bug**：`scipy.ndimage.sobel` 默认只算 S 轴，已修正为正确的
+   through-plane（R）与 3D 梯度误差（含 spacing）。
+2. **退化对齐（EXP001）**：训练退化 ≈ 实际退化（真实 MRI corr>0.99），无需对齐训练。
+3. **多方向融合（EXP002）**：R-A 与 R-S 高度冗余，融合无增益。
+4. **退化失配（EXP003）**：固定 Gaussian 模型在 Box/Fermi 上损害重建
+   （最差 -1.6~-2.4 dB，低于 Sinc）。
+5. **多退化训练（EXP004/005）**：从 {Gaussian,Box,Fermi} 随机采样退化核训练，
+   **跨 4 名受试者一致修复失配**（最差 Δ 从 ≈-2.0 dB 到 ≈0 dB），匹配条件持平或略升。
 
-## 主要发现
+## 当前最佳方法
 
-1. SMORE > Sinc 稳健（PSNR +0.32 dB，结构误差显著下降）。
-2. Sobel Gradient Loss ≈ 无效（与 L1 冗余），已 DISCARD。
-3. 训练退化（单轴低通）与推理实际退化（低通+下采样+Sinc）在频域可能不等价——
-   待数值验证。
+**SMORE-L1 + Multi-Degradation**（见 `BEST_METHOD.md`）。
 
-## 下一轮
+## 已淘汰方案
 
-- 方向 A 数值分析：合成信号 + 真实切片比较两种退化的频率响应与采样相位。
+- Sobel Gradient Loss（与 L1 冗余）
+- 退化对齐训练（失配可忽略）
+- 简单多方向平均融合（冗余）
+
+## 尚未解决 / 可继续
+
+- r=4 倍率、更多退化类型（噪声、不同截止频率）的鲁棒性
+- 在完全独立的未用测试集上做最终验证
+- 退化参数未知时的"盲超分"设定（不依赖已知退化标签）
 
 ## 最近一次 GitHub 更新
 
-- 待提交：梯度指标修正 + improvements/ 初始化（research 分支）。
+- 分支：`research/mri-sr-improvements`，commit `a67f641`（EXP005 验证）。
+- 访问：https://github.com/Aurorageek/mri-sr/tree/research/mri-sr-improvements
