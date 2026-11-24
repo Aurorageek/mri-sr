@@ -1,0 +1,1 @@
+experiment_id,experiment_name,date,research_question,hypothesis,baseline,method,dataset,subject_ids,degradation_ratio,actual_degradation,training_degradation,random_seed,training_steps,psnr,ssim,mae,through_plane_gradient_error,gradient_3d_error,hfen,runtime,peak_gpu_memory,status,decision,conclusion,code_commit

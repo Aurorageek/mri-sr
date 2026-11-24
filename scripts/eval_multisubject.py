@@ -38,7 +38,8 @@ METHODS = [
     ("smore_grad", "SMORE-Grad", "{s}_smore_grad.nii.gz"),
 ]
 
-METRIC_KEYS = ["psnr_db", "ssim", "mae", "gradient_mae"]
+METRIC_KEYS = ["psnr_db", "ssim", "mae", "gradient_mae",
+               "through_plane_gradient_mae", "gradient_3d_mae"]
 
 
 def parse_args(argv=None) -> argparse.Namespace:
@@ -86,20 +87,25 @@ def main(argv=None) -> int:
 
     for s in subjects:
         hr_path = PROJECT_ROOT / "data" / "processed" / s / f"{s}_HR.nii.gz"
-        hr = load_mri(hr_path, canonical=True).data.astype(np.float64)
+        hr_vol = load_mri(hr_path, canonical=True)
+        hr = hr_vol.data.astype(np.float64)
+        spacing = tuple(float(v) for v in hr_vol.voxel_spacing)
         mask = brain_mask(hr)
         per_subject_metrics[s] = {}
         for mkey, label, _ in METHODS:
             vol = load_method(s, mkey)
             if vol is None:
                 continue
-            m = evaluate_with_edge(hr, vol, mask)
+            m = evaluate_with_edge(hr, vol, mask, spacing=spacing, through_plane_axis=0)
             per_subject_metrics[s][mkey] = m
             rows.append({
                 "subject_id": s, "degradation_ratio": args.r, "method": mkey,
                 "lambda": {"sinc": None, "smore_l1": 0.0, "smore_grad": None}[mkey],
                 "psnr": round(m["psnr_db"], 4), "ssim": round(m["ssim"], 5),
-                "mae": round(m["mae"], 4), "gradient_error": round(m["gradient_mae"], 4),
+                "mae": round(m["mae"], 4),
+                "gradient_error": round(m["gradient_mae"], 4),              # 历史遗留 S 轴
+                "through_plane_gradient_error": round(m["through_plane_gradient_mae"], 4),
+                "gradient_3d_error": round(m["gradient_3d_mae"], 4),
             })
 
     out_dir = args.out_dir
@@ -109,11 +115,17 @@ def main(argv=None) -> int:
     per_csv = out_dir / "per_subject.csv"
     with per_csv.open("w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=["subject_id", "degradation_ratio", "method",
-                                          "lambda", "psnr", "ssim", "mae", "gradient_error"])
+                                          "lambda", "psnr", "ssim", "mae", "gradient_error",
+                                          "through_plane_gradient_error", "gradient_3d_error"])
         w.writeheader(); w.writerows(rows)
 
     # summary.csv：每方法每指标的 mean / std
-    row_keys = {"psnr_db": "psnr", "ssim": "ssim", "mae": "mae", "gradient_mae": "gradient_error"}
+    row_keys = {
+        "psnr_db": "psnr", "ssim": "ssim", "mae": "mae",
+        "gradient_mae": "gradient_error",
+        "through_plane_gradient_mae": "through_plane_gradient_error",
+        "gradient_3d_mae": "gradient_3d_error",
+    }
     summary_rows = []
     for mkey, label, _ in METHODS:
         rec = {"method": mkey, "label": label, "n_subjects": 0}
@@ -164,10 +176,11 @@ def main(argv=None) -> int:
     print("summary:")
     for r in summary_rows:
         print(f"  {r['label']:<12} PSNR {r.get('psnr_db_mean')} ± {r.get('psnr_db_std')}  "
-              f"SSIM {r.get('ssim_mean')}  GradMAE {r.get('gradient_mae_mean')}  (n={r['n_subjects']})")
+              f"SSIM {r.get('ssim_mean')}  TP-Grad {r.get('through_plane_gradient_mae_mean')}  "
+              f"3D-Grad {r.get('gradient_3d_mae_mean')}  (n={r['n_subjects']})")
     print("\nablation (配对差异):")
     for r in abl_rows:
-        print(f"  {r['metric']:<14} L1-Sinc={r['smore_l1_minus_sinc_mean']:+}  "
+        print(f"  {r['metric']:<28} L1-Sinc={r['smore_l1_minus_sinc_mean']:+}  "
               f"Grad-L1={r['smore_grad_minus_smore_l1_mean']:+}  "
               f"p(L1vsSinc)={r['wilcoxon_smore_l1_vs_sinc_p']}  p(GradvsL1)={r['wilcoxon_smore_grad_vs_smore_l1_p']}")
     print(f"\n输出: {out_dir}")

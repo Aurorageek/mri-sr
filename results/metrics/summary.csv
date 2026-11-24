@@ -1,4 +1,4 @@
-method,label,n_subjects,psnr_db_mean,psnr_db_std,ssim_mean,ssim_std,mae_mean,mae_std,gradient_mae_mean,gradient_mae_std
-sinc,Sinc,8,30.4982,2.1896,0.9291,0.0139,68.8033,5.3227,489.9615,33.3955
-smore_l1,SMORE-L1,8,30.8144,2.2812,0.9338,0.0143,64.1774,6.3691,375.7662,41.1911
-smore_grad,SMORE-Grad,8,30.8216,2.2807,0.934,0.0142,64.1076,6.3477,374.9362,41.1337
+method,label,n_subjects,psnr_db_mean,psnr_db_std,ssim_mean,ssim_std,mae_mean,mae_std,gradient_mae_mean,gradient_mae_std,through_plane_gradient_mae_mean,through_plane_gradient_mae_std,gradient_3d_mae_mean,gradient_3d_mae_std
+sinc,Sinc,8,30.4982,2.1896,0.9291,0.0139,68.8033,5.3227,489.9615,33.3955,1139.4469,53.4464,1018.9674,60.6007
+smore_l1,SMORE-L1,8,30.8144,2.2812,0.9338,0.0143,64.1774,6.3691,375.7662,41.1911,1029.007,61.8225,811.0332,63.2185
+smore_grad,SMORE-Grad,8,30.8216,2.2807,0.934,0.0142,64.1076,6.3477,374.9362,41.1337,1027.1814,61.3272,809.9375,62.856

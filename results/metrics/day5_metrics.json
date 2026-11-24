@@ -18,7 +18,9 @@
         "ssim": 0.9490852380110933,
         "mask_voxels": 4216289,
         "mae": 59.328861877102646,
-        "gradient_mae": 434.29919723759343
+        "gradient_mae": 434.29919723759343,
+        "through_plane_gradient_mae": 1062.9576751788609,
+        "gradient_3d_mae": 934.8532747718319
       },
       "smore_l1": {
         "mse": 7426.644679650753,
@@ -26,7 +28,9 @@
         "ssim": 0.9545241742268782,
         "mask_voxels": 4216289,
         "mae": 52.99985326674477,
-        "gradient_mae": 310.9557017611468
+        "gradient_mae": 310.9557017611468,
+        "through_plane_gradient_mae": 925.1796589424035,
+        "gradient_3d_mae": 710.7659776531868
       },
       "smore_grad": {
         "mse": 7406.101473968286,
@@ -34,7 +38,9 @@
         "ssim": 0.9546930798292568,
         "mask_voxels": 4216289,
         "mae": 52.93971078119144,
-        "gradient_mae": 309.2088745937681
+        "gradient_mae": 309.2088745937681,
+        "through_plane_gradient_mae": 923.3912711281034,
+        "gradient_3d_mae": 709.5974616492305
       }
     },
     "IXI014-HH-1236-T1": {
@@ -44,7 +50,9 @@
         "ssim": 0.9485584812982999,
         "mask_voxels": 3175944,
         "mae": 65.05432062600403,
-        "gradient_mae": 460.08434448856957
+        "gradient_mae": 460.08434448856957,
+        "through_plane_gradient_mae": 1174.718832516222,
+        "gradient_3d_mae": 1050.141676221416
       },
       "smore_l1": {
         "mse": 9336.694335510281,
@@ -52,7 +60,9 @@
         "ssim": 0.9537665695635036,
         "mask_voxels": 3175944,
         "mae": 58.27000923080369,
-        "gradient_mae": 328.8954766224822
+        "gradient_mae": 328.8954766224822,
+        "through_plane_gradient_mae": 1023.8885051032989,
+        "gradient_3d_mae": 804.2551556686152
       },
       "smore_grad": {
         "mse": 9336.069935196585,
@@ -60,7 +70,9 @@
         "ssim": 0.9537769956934525,
         "mask_voxels": 3175944,
         "mae": 58.23948821464838,
-        "gradient_mae": 328.7994710512226
+        "gradient_mae": 328.7994710512226,
+        "through_plane_gradient_mae": 1023.6481155182814,
+        "gradient_3d_mae": 804.2512157878118
       }
     },
     "IXI015-HH-1258-T1": {
@@ -70,7 +82,9 @@
         "ssim": 0.9417112007608855,
         "mask_voxels": 3968479,
         "mae": 62.40453961551323,
-        "gradient_mae": 451.95360823554614
+        "gradient_mae": 451.95360823554614,
+        "through_plane_gradient_mae": 1048.1453270425338,
+        "gradient_3d_mae": 917.8974236506336
       },
       "smore_l1": {
         "mse": 8407.123426076916,
@@ -78,7 +92,9 @@
         "ssim": 0.9469554501861422,
         "mask_voxels": 3968479,
         "mae": 57.40357948262328,
-        "gradient_mae": 332.1575217114844
+        "gradient_mae": 332.1575217114844,
+        "through_plane_gradient_mae": 934.7760071739668,
+        "gradient_3d_mae": 715.4476262640654
       },
       "smore_grad": {
         "mse": 8393.299954450622,
@@ -86,7 +102,9 @@
         "ssim": 0.9469130011016139,
         "mask_voxels": 3968479,
         "mae": 57.35977591032778,
-        "gradient_mae": 331.81988543579496
+        "gradient_mae": 331.81988543579496,
+        "through_plane_gradient_mae": 933.6932143009556,
+        "gradient_3d_mae": 714.8851260195174
       }
     },
     "IXI016-Guys-0697-T1": {
@@ -96,7 +114,9 @@
         "ssim": 0.9132632721904502,
         "mask_voxels": 4261321,
         "mae": 71.80158710697567,
-        "gradient_mae": 525.6160668681595
+        "gradient_mae": 525.6160668681595,
+        "through_plane_gradient_mae": 1136.690135811925,
+        "gradient_3d_mae": 1015.3351625360106
       },
       "smore_l1": {
         "mse": 11183.6960783299,
@@ -104,7 +124,9 @@
         "ssim": 0.9177416868892473,
         "mask_voxels": 4261321,
         "mae": 68.28500642069899,
-        "gradient_mae": 417.91258702461744
+        "gradient_mae": 417.91258702461744,
+        "through_plane_gradient_mae": 1048.2816739890504,
+        "gradient_3d_mae": 825.2473690566521
       },
       "smore_grad": {
         "mse": 11160.488618760444,
@@ -112,7 +134,9 @@
         "ssim": 0.9179546479180256,
         "mask_voxels": 4261321,
         "mae": 68.20228200643722,
-        "gradient_mae": 416.83338591877686
+        "gradient_mae": 416.83338591877686,
+        "through_plane_gradient_mae": 1046.1040525210794,
+        "gradient_3d_mae": 823.7723852121237
       }
     },
     "IXI017-Guys-0698-T1": {
@@ -122,7 +146,9 @@
         "ssim": 0.9247947700009539,
         "mask_voxels": 3649812,
         "mae": 72.26435675553005,
-        "gradient_mae": 510.9570549059332
+        "gradient_mae": 510.9570549059332,
+        "through_plane_gradient_mae": 1194.7307615063594,
+        "gradient_3d_mae": 1081.4423203137117
       },
       "smore_l1": {
         "mse": 11891.23109409303,
@@ -130,7 +156,9 @@
         "ssim": 0.9282634524341585,
         "mask_voxels": 3649812,
         "mae": 67.97453897443948,
-        "gradient_mae": 400.4489962330617
+        "gradient_mae": 400.4489962330617,
+        "through_plane_gradient_mae": 1086.674073076632,
+        "gradient_3d_mae": 870.9341048780337
       },
       "smore_grad": {
         "mse": 11891.74597525782,
@@ -138,7 +166,9 @@
         "ssim": 0.9284746218976963,
         "mask_voxels": 3649812,
         "mae": 67.94063386613657,
-        "gradient_mae": 401.14482467008776
+        "gradient_mae": 401.14482467008776,
+        "through_plane_gradient_mae": 1085.0130841165544,
+        "gradient_3d_mae": 870.0093775996636
       }
     },
     "IXI019-Guys-0702-T1": {
@@ -148,7 +178,9 @@
         "ssim": 0.9175725872341929,
         "mask_voxels": 4531720,
         "mae": 72.07040327235599,
-        "gradient_mae": 502.9515450929912
+        "gradient_mae": 502.9515450929912,
+        "through_plane_gradient_mae": 1146.585464234954,
+        "gradient_3d_mae": 1020.7671329898333
       },
       "smore_l1": {
         "mse": 11471.1140224609,
@@ -156,7 +188,9 @@
         "ssim": 0.9226104901786458,
         "mask_voxels": 4531720,
         "mae": 68.69737035138364,
-        "gradient_mae": 397.938797679724
+        "gradient_mae": 397.938797679724,
+        "through_plane_gradient_mae": 1062.76070759921,
+        "gradient_3d_mae": 835.4464714039854
       },
       "smore_grad": {
         "mse": 11449.780666103368,
@@ -164,7 +198,9 @@
         "ssim": 0.9225587499436969,
         "mask_voxels": 4531720,
         "mae": 68.64345202752632,
-        "gradient_mae": 396.88576434029625
+        "gradient_mae": 396.88576434029625,
+        "through_plane_gradient_mae": 1061.0025886681353,
+        "gradient_3d_mae": 834.6232948091603
       }
     },
     "IXI020-Guys-0700-T1": {
@@ -174,7 +210,9 @@
         "ssim": 0.9169652156588831,
         "mask_voxels": 3858959,
         "mae": 72.950940278384,
-        "gradient_mae": 508.17696078210184
+        "gradient_mae": 508.17696078210184,
+        "through_plane_gradient_mae": 1147.1265348170582,
+        "gradient_3d_mae": 1027.9741283035603
       },
       "smore_l1": {
         "mse": 11900.96050511608,
@@ -182,7 +220,9 @@
         "ssim": 0.9228573166264756,
         "mask_voxels": 3858959,
         "mae": 68.96641343284878,
-        "gradient_mae": 398.89950929172306
+        "gradient_mae": 398.89950929172306,
+        "through_plane_gradient_mae": 1045.4343272392907,
+        "gradient_3d_mae": 824.7976758107188
       },
       "smore_grad": {
         "mse": 11879.458243351897,
@@ -190,7 +230,9 @@
         "ssim": 0.9230050840919366,
         "mask_voxels": 3858959,
         "mae": 68.88751057181337,
-        "gradient_mae": 397.48689013376634
+        "gradient_mae": 397.48689013376634,
+        "through_plane_gradient_mae": 1043.6151842422205,
+        "gradient_3d_mae": 823.6937184035385
       }
     },
     "IXI021-Guys-0703-T1": {
@@ -200,7 +242,9 @@
         "ssim": 0.9211894938025722,
         "mask_voxels": 3848707,
         "mae": 74.551137421734,
-        "gradient_mae": 525.6533920344549
+        "gradient_mae": 525.6533920344549,
+        "through_plane_gradient_mae": 1204.620833197964,
+        "gradient_3d_mae": 1103.327987589208
       },
       "smore_l1": {
         "mse": 12970.393365180904,
@@ -208,7 +252,9 @@
         "ssim": 0.9240562091333858,
         "mask_voxels": 3848707,
         "mae": 70.82206219301872,
-        "gradient_mae": 418.92071337681386
+        "gradient_mae": 418.92071337681386,
+        "through_plane_gradient_mae": 1105.0610113364894,
+        "gradient_3d_mae": 901.3709164518016
       },
       "smore_grad": {
         "mse": 12931.55859747943,
@@ -216,7 +262,9 @@
         "ssim": 0.9244392765977684,
         "mask_voxels": 3848707,
         "mae": 70.64771444707301,
-        "gradient_mae": 417.31059884416226
+        "gradient_mae": 417.31059884416226,
+        "through_plane_gradient_mae": 1100.9834384024962,
+        "gradient_3d_mae": 898.6673256553796
       }
     }
   },
@@ -232,7 +280,11 @@
       "mae_mean": 68.8033,
       "mae_std": 5.3227,
       "gradient_mae_mean": 489.9615,
-      "gradient_mae_std": 33.3955
+      "gradient_mae_std": 33.3955,
+      "through_plane_gradient_mae_mean": 1139.4469,
+      "through_plane_gradient_mae_std": 53.4464,
+      "gradient_3d_mae_mean": 1018.9674,
+      "gradient_3d_mae_std": 60.6007
     },
     {
       "method": "smore_l1",
@@ -245,7 +297,11 @@
       "mae_mean": 64.1774,
       "mae_std": 6.3691,
       "gradient_mae_mean": 375.7662,
-      "gradient_mae_std": 41.1911
+      "gradient_mae_std": 41.1911,
+      "through_plane_gradient_mae_mean": 1029.007,
+      "through_plane_gradient_mae_std": 61.8225,
+      "gradient_3d_mae_mean": 811.0332,
+      "gradient_3d_mae_std": 63.2185
     },
     {
       "method": "smore_grad",
@@ -258,7 +314,11 @@
       "mae_mean": 64.1076,
       "mae_std": 6.3477,
       "gradient_mae_mean": 374.9362,
-      "gradient_mae_std": 41.1337
+      "gradient_mae_std": 41.1337,
+      "through_plane_gradient_mae_mean": 1027.1814,
+      "through_plane_gradient_mae_std": 61.3272,
+      "gradient_3d_mae_mean": 809.9375,
+      "gradient_3d_mae_std": 62.856
     }
   ],
   "ablation": [
@@ -292,6 +352,22 @@
       "smore_grad_minus_smore_l1_mean": -0.83,
       "wilcoxon_smore_l1_vs_sinc_p": 0.0078125,
       "wilcoxon_smore_grad_vs_smore_l1_p": 0.0390625,
+      "n_pairs": 8
+    },
+    {
+      "metric": "through_plane_gradient_mae",
+      "smore_l1_minus_sinc_mean": -110.4399,
+      "smore_grad_minus_smore_l1_mean": -1.8256,
+      "wilcoxon_smore_l1_vs_sinc_p": 0.0078125,
+      "wilcoxon_smore_grad_vs_smore_l1_p": 0.0078125,
+      "n_pairs": 8
+    },
+    {
+      "metric": "gradient_3d_mae",
+      "smore_l1_minus_sinc_mean": -207.9342,
+      "smore_grad_minus_smore_l1_mean": -1.0957,
+      "wilcoxon_smore_l1_vs_sinc_p": 0.0078125,
+      "wilcoxon_smore_grad_vs_smore_l1_p": 0.0078125,
       "n_pairs": 8
     }
   ]

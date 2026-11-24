@@ -164,26 +164,73 @@ def evaluate(
     }
 
 
+def sobel_axis_mae(
+    ref: np.ndarray,
+    test: np.ndarray,
+    mask: np.ndarray,
+    axis: int,
+    spacing: float = 1.0,
+) -> float:
+    """沿单个空间轴的单轴 Sobel 边缘误差（可除以该轴 voxel spacing）。
+
+    ``scipy.ndimage.sobel`` 指定 axis 时只计算该轴的 Sobel 响应。
+    """
+    _check_alignment(ref, test, mask)
+    r = np.asarray(ref, dtype=np.float64)
+    t = np.asarray(test, dtype=np.float64)
+    g_r = ndimage.sobel(r, axis=axis) / spacing
+    g_t = ndimage.sobel(t, axis=axis) / spacing
+    return float(np.mean(np.abs(g_r[mask] - g_t[mask])))
+
+
+def through_plane_gradient_mae(
+    ref: np.ndarray,
+    test: np.ndarray,
+    mask: np.ndarray,
+    axis: int = 0,
+    spacing: float = 1.0,
+) -> float:
+    """through-plane 方向的结构误差：沿退化轴（默认 R=axis0）的 Sobel 边缘误差。
+
+    Day 5 确认退化轴为 R（canonical axis 0，voxel spacing 1.2mm）。
+    """
+    return sobel_axis_mae(ref, test, mask, axis=axis, spacing=spacing)
+
+
+def gradient_3d_mae(
+    ref: np.ndarray,
+    test: np.ndarray,
+    mask: np.ndarray,
+    spacing: tuple[float, float, float] = (1.0, 1.0, 1.0),
+) -> float:
+    """三维空间梯度幅值误差，考虑各轴实际 voxel spacing。
+
+    定义：::
+
+        g_axis_i = sobel(vol, axis=i) / spacing_i
+        mag = sqrt(sum_i g_axis_i^2)
+        error = mean_{mask}( | mag(ref) - mag(test) | )
+    """
+    _check_alignment(ref, test, mask)
+    r = np.asarray(ref, dtype=np.float64)
+    t = np.asarray(test, dtype=np.float64)
+    mag_r = np.sqrt(sum((ndimage.sobel(r, axis=i) / spacing[i]) ** 2 for i in range(3)))
+    mag_t = np.sqrt(sum((ndimage.sobel(t, axis=i) / spacing[i]) ** 2 for i in range(3)))
+    return float(np.mean(np.abs(mag_r[mask] - mag_t[mask])))
+
+
 def gradient_mae(
     ref: np.ndarray,
     test: np.ndarray,
     mask: np.ndarray,
 ) -> float:
-    """脑组织区域内的边缘误差：Sobel 梯度幅值差的平均绝对误差（3D）。
+    """【历史遗留指标】仅沿 S 轴（axis=-1）的单轴 Sobel 边缘误差。
 
-    用于 Day 4 的结构保持评估。定义：::
-
-        grad_mae = mean_{mask}( | sobel_mag(ref) - sobel_mag(test) | )
-
-    其中 sobel_mag 用 scipy.ndimage.sobel（3D 梯度幅值）。ref/test 需同形、
-    同空间网格、同强度域（与 PSNR/SSIM 一致的原始强度）。
+    注意：Day 4/5 报告的 "Gradient MAE" 即此定义——它既不是三维梯度幅值，
+    也没有对准 through-plane（R）方向。请改用 :func:`through_plane_gradient_mae`
+    或 :func:`gradient_3d_mae`。
     """
-    _check_alignment(ref, test, mask)
-    r = np.asarray(ref, dtype=np.float64)
-    t = np.asarray(test, dtype=np.float64)
-    mag_r = ndimage.sobel(r)
-    mag_t = ndimage.sobel(t)
-    return float(np.mean(np.abs(mag_r[mask] - mag_t[mask])))
+    return sobel_axis_mae(ref, test, mask, axis=-1)
 
 
 def evaluate_with_edge(
@@ -192,13 +239,24 @@ def evaluate_with_edge(
     mask: np.ndarray,
     *,
     win_size: int = 7,
+    spacing: tuple[float, float, float] = (1.0, 1.0, 1.0),
+    through_plane_axis: int = 0,
 ) -> dict:
     """PSNR / SSIM / MAE / 边缘误差 一次算齐。
 
-    注意：Day 4 曾把 ``mse ** 0.5``（即 RMSE）误标为 ``mae``，Day 6 已修正为
-    真正的平均绝对误差 ``mean |ref - test|``；PSNR/SSIM/Gradient MAE 不受影响。
+    返回：
+    - ``mae``：真实平均绝对误差（Day 6 修正）。
+    - ``gradient_mae``：历史遗留的 S 轴 Sobel 误差（保留供对照，明确标注）。
+    - ``through_plane_gradient_mae``：退化方向（默认 R=axis0）边缘误差。
+    - ``gradient_3d_mae``：考虑 voxel spacing 的三维梯度幅值误差。
+
+    spacing 为 canonical RAS+ 的三轴 voxel spacing（mm），默认各向同性 (1,1,1)。
     """
     base = evaluate(ref, test, mask, win_size=win_size)
     base["mae"] = mae(ref, test, mask)
     base["gradient_mae"] = gradient_mae(ref, test, mask)
+    base["through_plane_gradient_mae"] = through_plane_gradient_mae(
+        ref, test, mask, axis=through_plane_axis, spacing=spacing[through_plane_axis]
+    )
+    base["gradient_3d_mae"] = gradient_3d_mae(ref, test, mask, spacing=spacing)
     return base
