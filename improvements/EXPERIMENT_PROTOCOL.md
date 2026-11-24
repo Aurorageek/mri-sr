@@ -28,6 +28,16 @@
 - 评价 mask：前景 mask（HR > 0.01·P99.9，3×3×3 腐蚀×2），**非严格脑分割**。
 - 强度域：原始强度；data_range 由 HR 前景决定，所有方法统一。
 
+## 2b. 实验协议区分（Day 7 新增）
+
+- **Protocol A（Frozen-model Transfer）**：在一种 LR 上训练，固定 checkpoint，用于
+  其他退化条件。研究跨退化迁移能力。
+- **Protocol B（Subject-specific Self-supervised Adaptation）**：对每一种实际 LR
+  （g_gaussian / g_box / g_fermi）分别做自监督适配，再评价。研究标准 SMORE 在
+  退化失配下的表现。
+
+> EXP003–005 属 Protocol A；其结论需在 Protocol B 下重新验证（见 EXP006）。
+
 ## 3. 数据隔离
 
 - 自监督训练只用 `_sinc_r2.nii.gz`（g），HR 只用于最终评价。
