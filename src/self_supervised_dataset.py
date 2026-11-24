@@ -63,7 +63,7 @@ class SMOREDataset(Dataset):
         g_path: str | Path,
         *,
         r: float = 2.0,
-        filter_name: str = "gaussian",
+        filter_name: str | list[str] = "gaussian",
         patch_size: int = 32,
         patches_per_slice: int = 32,
         mode: str = "train",
@@ -83,7 +83,9 @@ class SMOREDataset(Dataset):
         self.affine = vol.affine
         self.g_shape = g.shape
         self.r = float(r)
-        self.filter_name = filter_name
+        # 支持单一滤波器（str）或多退化（list），训练样本在多个退化间随机采样
+        self.filter_names = [filter_name] if isinstance(filter_name, str) else list(filter_name)
+        self.multi = len(self.filter_names) > 1
         self.patch_size = patch_size
         self.patches_per_slice = patches_per_slice
         self.scale = scale if scale is not None else _foreground_scale(g)
@@ -102,14 +104,15 @@ class SMOREDataset(Dataset):
         chosen = train_idx if mode == "train" else val_idx
         self.r_indices = list(int(i) for i in chosen)
 
-        # 预计算每张切片：沿 axis 0 (=A) 模糊得到输入，目标为原始切片
-        self.inputs: list[np.ndarray] = []
+        # 预计算 targets（共享）与每个滤波器的 inputs
         self.targets: list[np.ndarray] = []
+        self.inputs_by_filter: dict[str, list[np.ndarray]] = {f: [] for f in self.filter_names}
         for i in self.r_indices:
             slc = g_norm[i, :, :]  # (A, S)
-            blurred = lowpass_along_axis(slc, axis=0, r=self.r, filter_name=self.filter_name)
-            self.inputs.append(blurred.astype(np.float32))
             self.targets.append(slc.astype(np.float32))
+            for f in self.filter_names:
+                blurred = lowpass_along_axis(slc, axis=0, r=self.r, filter_name=f)
+                self.inputs_by_filter[f].append(blurred.astype(np.float32))
 
         self._rng = np.random.default_rng(seed)
 
@@ -147,10 +150,14 @@ class SMOREDataset(Dataset):
 
     def __getitem__(self, idx: int) -> tuple[torch.Tensor, torch.Tensor]:
         slice_i = idx // self.patches_per_slice
-        slice_i = slice_i % len(self.inputs)
+        slice_i = slice_i % len(self.targets)
+        # 多退化时随机选一个滤波器；否则固定唯一滤波器
+        fi = int(self._rng.integers(0, len(self.filter_names))) if self.multi else 0
+        f = self.filter_names[fi]
+        inp_full = self.inputs_by_filter[f][slice_i]
         # 关键：input 与 target 使用同一次随机裁剪位置，保证严格对齐
-        i0, j0 = self._random_crop_offset(self.inputs[slice_i].shape)
-        inp = self._crop_patch(self.inputs[slice_i], i0, j0)
+        i0, j0 = self._random_crop_offset(inp_full.shape)
+        inp = self._crop_patch(inp_full, i0, j0)
         tgt = self._crop_patch(self.targets[slice_i], i0, j0)
         inp, tgt = self._augment(inp, tgt)
         x = torch.from_numpy(inp[None, ...].copy())   # [1,H,W]

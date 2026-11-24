@@ -153,7 +153,8 @@ def stage_b_train(cfg: dict, args, device: torch.device) -> dict:
     max_steps = int(args.max_steps if args.max_steps is not None else tr.get("max_steps", 3000))
 
     r = float(data.get("r", 2.0))
-    filter_name = data.get("filter_name", "gaussian")
+    # 支持多退化训练：--filters 提供列表则随机采样多个滤波器
+    filter_name = args.filters if args.filters else data.get("filter_name", "gaussian")
     patch_size = int(data.get("patch_size", 32))
     patches_per_slice = int(data.get("patches_per_slice", 32))
     val_interval = int(data.get("val_interval", 5))
@@ -313,6 +314,7 @@ def parse_args(argv=None) -> argparse.Namespace:
     p.add_argument("--max-steps", type=int, default=None)
     p.add_argument("--seed", type=int, default=None)
     p.add_argument("--g-path", default=None, help="覆盖 config 里的 data.g_path（多受试者）")
+    p.add_argument("--filters", nargs="*", default=None, help="多退化训练：滤波器列表，如 --filters gaussian box fermi")
     return p.parse_args(argv)
 
 
