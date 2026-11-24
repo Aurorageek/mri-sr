@@ -589,3 +589,26 @@ python scripts/analyze_structure.py --subject IXI016-Guys-0697-T1
 
 其余正确性检查（退化轴=R、无 HR 泄漏、统一评价协议、λ 在开发集选择）均通过，
 详见 `DAY6_REPORT.md` 第 9 节。
+
+---
+
+## 15. 后续自主研究（improvements/）
+
+Day 6 之后的研究循环位于 [`improvements/`](improvements/) 目录（研究分支
+`research/mri-sr-improvements`），包括：
+
+- `improvements/RESEARCH_PLAN.md`、`RESEARCH_LOG.md`、`CURRENT_STATUS.md`、`BEST_METHOD.md`
+- `improvements/experiments/EXP001–EXP015/`（每个实验的问题、假设、结果、决策）
+- `improvements/reports/PHASE2_REPORT.md`、`PHASE3_REPORT.md`、`PAPER_EXPERIMENTS.md`
+- `improvements/figures/paper/`（论文级图表）
+
+**核心研究结论**：SMORE 对训练退化核敏感——默认 Gaussian 核在 Box/Fermi 实际退化下
+比 Sinc 低 1.2–1.8 dB；改用 **Box 核自监督训练（SMORE-Fixed-Box）** 后，在 4 名
+独立受试者、3 种退化的 12 个组合上全部优于 Sinc（mean +0.244 dB，worst +0.062 dB），
+且无需额外计算。多退化采样与自适应退化估计均被实验证伪/否定。
+
+```powershell
+python improvements/scripts/generate_lr.py --subject IXI022-Guys-0701-T1 --filter box
+python scripts/train_smore.py --loss l1 --g-path data/processed/IXI022-Guys-0701-T1/IXI022-Guys-0701-T1_sinc_r2.nii.gz --filters box --experiment-name IXI022_indep_fixedbox
+python improvements/scripts/eval_independent_robustness.py
+```
