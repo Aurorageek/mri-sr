@@ -1,0 +1,19 @@
+{
+  "experiment": "dev_IXI012_grad005",
+  "loss": "l1_grad",
+  "lambda_grad": 0.05,
+  "seed": 42,
+  "scale": 1780.599575805663,
+  "max_steps": 3000,
+  "best_val_total": 0.0021441824847715906,
+  "best_step": 1400,
+  "train_seconds": 51.56,
+  "peak_gpu_mb": 113.23,
+  "n_params": 592065,
+  "n_train_slices": 120,
+  "n_val_slices": 30,
+  "checkpoint_dir": "results\\checkpoints\\dev_IXI012_grad005",
+  "tensorboard_dir": "results\\tensorboard\\dev_IXI012_grad005",
+  "train_csv": "results\\logs\\csv\\dev_IXI012_grad005_train.csv",
+  "val_csv": "results\\logs\\csv\\dev_IXI012_grad005_val.csv"
+}

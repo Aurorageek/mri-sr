@@ -1,0 +1,298 @@
+{
+  "subjects": [
+    "IXI013-HH-1212-T1",
+    "IXI014-HH-1236-T1",
+    "IXI015-HH-1258-T1",
+    "IXI016-Guys-0697-T1",
+    "IXI017-Guys-0698-T1",
+    "IXI019-Guys-0702-T1",
+    "IXI020-Guys-0700-T1",
+    "IXI021-Guys-0703-T1"
+  ],
+  "degradation_ratio": 2.0,
+  "per_subject": {
+    "IXI013-HH-1212-T1": {
+      "sinc": {
+        "mse": 8272.853266642365,
+        "psnr_db": 33.77688271632883,
+        "ssim": 0.9490852380110933,
+        "mask_voxels": 4216289,
+        "mae": 90.95522671425961,
+        "gradient_mae": 434.29919723759343
+      },
+      "smore_l1": {
+        "mse": 7426.644679650753,
+        "psnr_db": 34.24550947035256,
+        "ssim": 0.9545241742268782,
+        "mask_voxels": 4216289,
+        "mae": 86.1779825689297,
+        "gradient_mae": 310.9557017611468
+      },
+      "smore_grad": {
+        "mse": 7406.101473968286,
+        "psnr_db": 34.25753934867812,
+        "ssim": 0.9546930798292568,
+        "mask_voxels": 4216289,
+        "mae": 86.05870946027652,
+        "gradient_mae": 309.2088745937681
+      }
+    },
+    "IXI014-HH-1236-T1": {
+      "sinc": {
+        "mse": 10517.382550141525,
+        "psnr_db": 32.7628707585352,
+        "ssim": 0.9485584812982999,
+        "mask_voxels": 3175944,
+        "mae": 102.55429074466619,
+        "gradient_mae": 460.08434448856957
+      },
+      "smore_l1": {
+        "mse": 9336.694335510281,
+        "psnr_db": 33.2800160559377,
+        "ssim": 0.9537665695635036,
+        "mask_voxels": 3175944,
+        "mae": 96.62657158106295,
+        "gradient_mae": 328.8954766224822
+      },
+      "smore_grad": {
+        "mse": 9336.069935196585,
+        "psnr_db": 33.280306504215105,
+        "ssim": 0.9537769956934525,
+        "mask_voxels": 3175944,
+        "mae": 96.62334053010476,
+        "gradient_mae": 328.7994710512226
+      }
+    },
+    "IXI015-HH-1258-T1": {
+      "sinc": {
+        "mse": 9071.817294959474,
+        "psnr_db": 33.311828903109166,
+        "ssim": 0.9417112007608855,
+        "mask_voxels": 3968479,
+        "mae": 95.24608808218568,
+        "gradient_mae": 451.95360823554614
+      },
+      "smore_l1": {
+        "mse": 8407.123426076916,
+        "psnr_db": 33.642297619240864,
+        "ssim": 0.9469554501861422,
+        "mask_voxels": 3968479,
+        "mae": 91.69036713895804,
+        "gradient_mae": 332.1575217114844
+      },
+      "smore_grad": {
+        "mse": 8393.299954450622,
+        "psnr_db": 33.649444413898195,
+        "ssim": 0.9469130011016139,
+        "mask_voxels": 3968479,
+        "mae": 91.61495486246021,
+        "gradient_mae": 331.81988543579496
+      }
+    },
+    "IXI016-Guys-0697-T1": {
+      "sinc": {
+        "mse": 11685.433357947999,
+        "psnr_db": 28.442560664522123,
+        "ssim": 0.9132632721904502,
+        "mask_voxels": 4261321,
+        "mae": 108.09918296614457,
+        "gradient_mae": 525.6160668681595
+      },
+      "smore_l1": {
+        "mse": 11183.6960783299,
+        "psnr_db": 28.633155329999248,
+        "ssim": 0.9177416868892473,
+        "mask_voxels": 4261321,
+        "mae": 105.7529955997933,
+        "gradient_mae": 417.91258702461744
+      },
+      "smore_grad": {
+        "mse": 11160.488618760444,
+        "psnr_db": 28.642176805063908,
+        "ssim": 0.9179546479180256,
+        "mask_voxels": 4261321,
+        "mae": 105.64321378470292,
+        "gradient_mae": 416.83338591877686
+      }
+    },
+    "IXI017-Guys-0698-T1": {
+      "sinc": {
+        "mse": 12824.837026931418,
+        "psnr_db": 29.03105226392118,
+        "ssim": 0.9247947700009539,
+        "mask_voxels": 3649812,
+        "mae": 113.24679698309978,
+        "gradient_mae": 510.9570549059332
+      },
+      "smore_l1": {
+        "mse": 11891.23109409303,
+        "psnr_db": 29.359302620955884,
+        "ssim": 0.9282634524341585,
+        "mask_voxels": 3649812,
+        "mae": 109.04692152506199,
+        "gradient_mae": 400.4489962330617
+      },
+      "smore_grad": {
+        "mse": 11891.74597525782,
+        "psnr_db": 29.359114578854943,
+        "ssim": 0.9284746218976963,
+        "mask_voxels": 3649812,
+        "mae": 109.04928232344227,
+        "gradient_mae": 401.14482467008776
+      }
+    },
+    "IXI019-Guys-0702-T1": {
+      "sinc": {
+        "mse": 11905.286419146825,
+        "psnr_db": 29.32341222435781,
+        "ssim": 0.9175725872341929,
+        "mask_voxels": 4531720,
+        "mae": 109.11134871839329,
+        "gradient_mae": 502.9515450929912
+      },
+      "smore_l1": {
+        "mse": 11471.1140224609,
+        "psnr_db": 29.484754739676966,
+        "ssim": 0.9226104901786458,
+        "mask_voxels": 4531720,
+        "mae": 107.10328670242058,
+        "gradient_mae": 397.938797679724
+      },
+      "smore_grad": {
+        "mse": 11449.780666103368,
+        "psnr_db": 29.49283903284943,
+        "ssim": 0.9225587499436969,
+        "mask_voxels": 4531720,
+        "mae": 107.00364791026225,
+        "gradient_mae": 396.88576434029625
+      }
+    },
+    "IXI020-Guys-0700-T1": {
+      "sinc": {
+        "mse": 12558.116598722885,
+        "psnr_db": 28.895739934964375,
+        "ssim": 0.9169652156588831,
+        "mask_voxels": 3858959,
+        "mae": 112.0630028096824,
+        "gradient_mae": 508.17696078210184
+      },
+      "smore_l1": {
+        "mse": 11900.96050511608,
+        "psnr_db": 29.129164906109942,
+        "ssim": 0.9228573166264756,
+        "mask_voxels": 3858959,
+        "mae": 109.09152352550623,
+        "gradient_mae": 398.89950929172306
+      },
+      "smore_grad": {
+        "mse": 11879.458243351897,
+        "psnr_db": 29.137018692265965,
+        "ssim": 0.9230050840919366,
+        "mask_voxels": 3858959,
+        "mae": 108.99292749234648,
+        "gradient_mae": 397.48689013376634
+      }
+    },
+    "IXI021-Guys-0703-T1": {
+      "sinc": {
+        "mse": 13898.457010524644,
+        "psnr_db": 28.441015406242816,
+        "ssim": 0.9211894938025722,
+        "mask_voxels": 3848707,
+        "mae": 117.8917173109487,
+        "gradient_mae": 525.6533920344549
+      },
+      "smore_l1": {
+        "mse": 12970.393365180904,
+        "psnr_db": 28.741149811828986,
+        "ssim": 0.9240562091333858,
+        "mask_voxels": 3848707,
+        "mae": 113.88763482126102,
+        "gradient_mae": 418.92071337681386
+      },
+      "smore_grad": {
+        "mse": 12931.55859747943,
+        "psnr_db": 28.754172566238033,
+        "ssim": 0.9244392765977684,
+        "mask_voxels": 3848707,
+        "mae": 113.71701102948244,
+        "gradient_mae": 417.31059884416226
+      }
+    }
+  },
+  "summary": [
+    {
+      "method": "sinc",
+      "label": "Sinc",
+      "n_subjects": 8,
+      "psnr_db_mean": 30.4982,
+      "psnr_db_std": 2.1896,
+      "ssim_mean": 0.9291,
+      "ssim_std": 0.0139,
+      "mae_mean": 106.1459,
+      "mae_std": 8.6492,
+      "gradient_mae_mean": 489.9615,
+      "gradient_mae_std": 33.3955
+    },
+    {
+      "method": "smore_l1",
+      "label": "SMORE-L1",
+      "n_subjects": 8,
+      "psnr_db_mean": 30.8144,
+      "psnr_db_std": 2.2812,
+      "ssim_mean": 0.9338,
+      "ssim_std": 0.0143,
+      "mae_mean": 102.4222,
+      "mae_std": 9.1205,
+      "gradient_mae_mean": 375.7662,
+      "gradient_mae_std": 41.1911
+    },
+    {
+      "method": "smore_grad",
+      "label": "SMORE-Grad",
+      "n_subjects": 8,
+      "psnr_db_mean": 30.8216,
+      "psnr_db_std": 2.2807,
+      "ssim_mean": 0.934,
+      "ssim_std": 0.0142,
+      "mae_mean": 102.3379,
+      "mae_std": 9.1115,
+      "gradient_mae_mean": 374.9362,
+      "gradient_mae_std": 41.1337
+    }
+  ],
+  "ablation": [
+    {
+      "metric": "psnr_db",
+      "smore_l1_minus_sinc_mean": 0.3162,
+      "smore_grad_minus_smore_l1_mean": 0.0072,
+      "wilcoxon_smore_l1_vs_sinc_p": 0.0078125,
+      "wilcoxon_smore_grad_vs_smore_l1_p": 0.015625,
+      "n_pairs": 8
+    },
+    {
+      "metric": "ssim",
+      "smore_l1_minus_sinc_mean": 0.0047,
+      "smore_grad_minus_smore_l1_mean": 0.0001,
+      "wilcoxon_smore_l1_vs_sinc_p": 0.0078125,
+      "wilcoxon_smore_grad_vs_smore_l1_p": 0.078125,
+      "n_pairs": 8
+    },
+    {
+      "metric": "mae",
+      "smore_l1_minus_sinc_mean": -3.7238,
+      "smore_grad_minus_smore_l1_mean": -0.0843,
+      "wilcoxon_smore_l1_vs_sinc_p": 0.0078125,
+      "wilcoxon_smore_grad_vs_smore_l1_p": 0.015625,
+      "n_pairs": 8
+    },
+    {
+      "metric": "gradient_mae",
+      "smore_l1_minus_sinc_mean": -114.1954,
+      "smore_grad_minus_smore_l1_mean": -0.83,
+      "wilcoxon_smore_l1_vs_sinc_p": 0.0078125,
+      "wilcoxon_smore_grad_vs_smore_l1_p": 0.0390625,
+      "n_pairs": 8
+    }
+  ]
+}

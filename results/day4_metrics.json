@@ -1,0 +1,52 @@
+{
+  "subject": "IXI002-Guys-0828-T1",
+  "mask_voxels": 3241975,
+  "methods": {
+    "Sinc": {
+      "mse": 1539.8429293725192,
+      "psnr_db": 28.63135307346177,
+      "ssim": 0.9231252989987863,
+      "mask_voxels": 3241975,
+      "mae": 39.240832424561525,
+      "gradient_mae": 171.47672320314052
+    },
+    "smore_day4_l1": {
+      "mse": 1446.0963446553947,
+      "psnr_db": 28.90414502191824,
+      "ssim": 0.9259252576552138,
+      "mask_voxels": 3241975,
+      "mae": 38.02757347840373,
+      "gradient_mae": 136.41510655835998
+    },
+    "smore_day4_grad001": {
+      "mse": 1444.5279143495038,
+      "psnr_db": 28.90885791873852,
+      "ssim": 0.9261171874754216,
+      "mask_voxels": 3241975,
+      "mae": 38.00694560668489,
+      "gradient_mae": 136.08667930941098
+    },
+    "smore_day4_grad005": {
+      "mse": 1445.1783070196825,
+      "psnr_db": 28.906902966014194,
+      "ssim": 0.9261567751956992,
+      "mask_voxels": 3241975,
+      "mae": 38.01550087819024,
+      "gradient_mae": 136.10260066459523
+    },
+    "smore_day4_grad010": {
+      "mse": 1446.262364617055,
+      "psnr_db": 28.903646456141576,
+      "ssim": 0.9260809766447567,
+      "mask_voxels": 3241975,
+      "mae": 38.029756304991686,
+      "gradient_mae": 136.1323563708324
+    }
+  },
+  "figures": [
+    "results\\figures\\comparison\\IXI002-Guys-0828-T1_coronal_slices.png",
+    "results\\figures\\comparison\\IXI002-Guys-0828-T1_coronal_errors.png",
+    "results\\figures\\comparison\\IXI002-Guys-0828-T1_sagittal_slices.png",
+    "results\\figures\\comparison\\IXI002-Guys-0828-T1_sagittal_errors.png"
+  ]
+}

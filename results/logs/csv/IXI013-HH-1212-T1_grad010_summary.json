@@ -1,0 +1,19 @@
+{
+  "experiment": "IXI013-HH-1212-T1_grad010",
+  "loss": "l1_grad",
+  "lambda_grad": 0.1,
+  "seed": 42,
+  "scale": 1669.855744628906,
+  "max_steps": 3000,
+  "best_val_total": 0.0021145764369672783,
+  "best_step": 2200,
+  "train_seconds": 49.64,
+  "peak_gpu_mb": 113.23,
+  "n_params": 592065,
+  "n_train_slices": 120,
+  "n_val_slices": 30,
+  "checkpoint_dir": "results\\checkpoints\\IXI013-HH-1212-T1_grad010",
+  "tensorboard_dir": "results\\tensorboard\\IXI013-HH-1212-T1_grad010",
+  "train_csv": "results\\logs\\csv\\IXI013-HH-1212-T1_grad010_train.csv",
+  "val_csv": "results\\logs\\csv\\IXI013-HH-1212-T1_grad010_val.csv"
+}

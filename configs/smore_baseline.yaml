@@ -1,0 +1,42 @@
+# Day 3 简化 SMORE(3D) 自监督训练配置
+# 所有实验路径与超参数均在此管理，脚本优先读本配置。
+
+experiment:
+  name: "smore_baseline"
+  subject: "IXI002-Guys-0828-T1"   # 单受试者训练
+  seed: 42
+  note: "简化 SMORE(3D)：EDSR(8x64) 在 in-plane(A-S) 平面自监督学习 1D 去模糊"
+
+data:
+  g_path: "data/processed/IXI002-Guys-0828-T1/IXI002-Guys-0828-T1_sinc_r2.nii.gz"  # 训练唯一允许的数据
+  hr_path: "data/processed/IXI002-Guys-0828-T1/IXI002-Guys-0828-T1_HR.nii.gz"     # 仅最终评价读取
+  r: 2.0                        # 与 Day 2 退化一致的倍率
+  filter_name: "gaussian"       # 与 Day 2 退化一致的模糊核
+  patch_size: 32
+  patches_per_slice: 32
+  val_interval: 5               # 每 5 个 R 切片留 1 个做自监督验证
+
+model:
+  n_resblocks: 8
+  n_feats: 64
+  res_scale: 0.1
+  n_channels: 1
+
+training:
+  batch_size: 16
+  lr: 1.0e-4
+  weight_decay: 0.0
+  loss: "l1"
+  max_steps: 3000
+  val_every: 200
+  num_workers: 0                # Windows 上避免多进程问题
+  precision: "fp32"             # 2080 Ti 不支持原生 BF16；FP32 起步
+  checkpoint_dir: "results/checkpoints/smore_baseline"
+  log_dir: "results/logs/smore_baseline"
+
+# 阶段 A：最小过拟合测试（少量固定 patch，验证训练管线）
+overfit:
+  enabled: true
+  n_patches: 8
+  steps: 400
+  lr: 2.0e-4

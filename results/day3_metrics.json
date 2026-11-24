@@ -1,0 +1,21 @@
+{
+  "subject": "IXI002-Guys-0828-T1",
+  "mask_voxels": 3241975,
+  "sinc": {
+    "mse": 1539.8429293725192,
+    "psnr_db": 28.63135307346177,
+    "ssim": 0.9231252989987863,
+    "mask_voxels": 3241975
+  },
+  "smore": {
+    "mse": 1447.2075497283092,
+    "psnr_db": 28.900809110636374,
+    "ssim": 0.9259660736180099,
+    "mask_voxels": 3241975
+  },
+  "delta_psnr_db": 0.2695,
+  "figures": [
+    "results\\figures\\day3\\IXI002-Guys-0828-T1_coronal_sinc_vs_smore.png",
+    "results\\figures\\day3\\IXI002-Guys-0828-T1_sagittal_sinc_vs_smore.png"
+  ]
+}

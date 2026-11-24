@@ -1,0 +1,19 @@
+{
+  "experiment": "day4_grad_001",
+  "loss": "l1_grad",
+  "lambda_grad": 0.01,
+  "seed": 42,
+  "scale": 606.3023812866206,
+  "max_steps": 3000,
+  "best_val_total": 0.0013510635552326372,
+  "best_step": 3000,
+  "train_seconds": 51.52,
+  "peak_gpu_mb": 113.23,
+  "n_params": 592065,
+  "n_train_slices": 120,
+  "n_val_slices": 30,
+  "checkpoint_dir": "results\\checkpoints\\day4_grad_001",
+  "tensorboard_dir": "results\\tensorboard\\day4_grad_001",
+  "train_csv": "results\\logs\\csv\\day4_grad_001_train.csv",
+  "val_csv": "results\\logs\\csv\\day4_grad_001_val.csv"
+}

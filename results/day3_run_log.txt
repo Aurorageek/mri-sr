@@ -1,0 +1,25 @@
+﻿MRI-SR Day 3 run log
+Generated: 2026-11-24 18:21:58
+Python: C:\Users\Xuanyu Liu\miniconda3\envs\mri\python.exe
+
+===== 1. tests/test_smore.py =====
+PASS  模型: 输入 [B,1,32,32] -> 输出 [B,1,32,32]，参数量合理
+PASS  lowpass_along_axis: 只模糊指定轴，另一轴不变
+PASS  SMOREDataset: input 是 target 沿 axis 0 的模糊，且严格对齐
+PASS  SMOREDataset: train/val 切片不重叠
+PASS  Loss 下降: 小规模过拟合 L1 明显下降
+PASS  推理: 体数据形状不变、有限值
+PASS  GPU: CUDA 上可完成前向+反向
+PASS  训练数据不使用 HR：脚本只读 sinc，不读 HR
+
+------------------------------------------------------------
+Day3 单元测试汇总: 8 passed, 0 failed, 8 total
+exit code: 0
+
+===== 2. scripts/eval_smore.py (SMORE vs Sinc) =====
+=== IXI002-Guys-0828-T1 ===
+Sinc   : PSNR=28.631 dB  SSIM=0.92313  MAE=39.241
+SMORE  : PSNR=28.901 dB  SSIM=0.92597  MAE=38.042
+ΔPSNR  : +0.269 dB
+结果 JSON: C:\PROJECTS\MRI_SR\results\day3_metrics.json
+exit code: 0

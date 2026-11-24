@@ -1,0 +1,30 @@
+{
+  "platform": "Windows-10-10.0.22621-SP0",
+  "machine": "AMD64",
+  "python": {
+    "version": "3.11.18",
+    "executable": "C:\\Users\\Xuanyu Liu\\miniconda3\\envs\\mri\\python.exe",
+    "conda_env": "C:\\Users\\Xuanyu Liu\\miniconda3\\envs\\mri"
+  },
+  "numpy": "2.4.6",
+  "nibabel": "5.5.0",
+  "matplotlib": "3.11.2",
+  "torch": {
+    "version": "2.7.1+cu118",
+    "cuda_built": "11.8",
+    "cuda_available": true,
+    "cudnn_version": 90100,
+    "device_count": 1,
+    "device_name": "NVIDIA GeForce RTX 2080 Ti",
+    "device_capability": [
+      7,
+      5
+    ],
+    "total_memory_gb": 11.0,
+    "gpu_smoke_test": {
+      "operation": "64x64 matmul on cuda",
+      "ok": true,
+      "sample_value": 54.80315399169922
+    }
+  }
+}

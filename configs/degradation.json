@@ -1,0 +1,17 @@
+{
+  "through_plane_axis": 0,
+  "axis_note": "canonical RAS+ axis: 0=R, 1=A, 2=S. IXI T1 is sagittal-stored, so the native 1.2 mm thick-slice (through-plane) direction is R -> axis 0. Do NOT default to S/Z.",
+  "r": 2,
+  "filter": "gaussian",
+  "filter_note": "gaussian = SMORE slice-profile anti-aliasing (half-power at Nyquist/r); box = ideal sinc truncation (demonstrates ringing); fermi = smooth anti-ringing window.",
+  "hr_spacing_mm": [1.2, 0.9375, 0.9375],
+  "lr_spacing_mm_after_r2": [2.4, 0.9375, 0.9375],
+  "sinc_baseline": {
+    "method": "k-space zero-padding + IFFT (ideal band-limited interpolation)"
+  },
+  "metrics": {
+    "mask_method": "HR > 0.01 * P99.9(HR), then 3x3x3 binary erosion x2",
+    "data_range": "reference HR foreground (max - min) within mask",
+    "ssim_win_size": 7
+  }
+}

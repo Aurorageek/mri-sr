@@ -1,0 +1,28 @@
+﻿MRI-SR Day 4 run log
+Generated: 2026-11-24 18:43:33
+Python: C:\Users\Xuanyu Liu\miniconda3\envs\mri\python.exe
+
+===== 1. tests/test_losses.py =====
+PASS  SobelLoss 输出有限标量，且 pred==target 时为 0
+PASS  SobelLoss 可反向传播产生梯度
+PASS  lambda=0 时 total 严格等于 L1
+PASS  SobelLoss 的 device/dtype 正确（CPU/float32）
+PASS  SobelLoss 对常数图像输出 0（无伪边缘）
+PASS  SobelLoss 对高频边缘变化敏感
+
+------------------------------------------------------------
+Day4 损失单元测试汇总: 6 passed, 0 failed, 6 total
+exit code: 0
+
+===== 2. scripts/eval_smore.py (Sinc vs SMORE-L1 vs SMORE-Grad) =====
+
+Method                       PSNR     SSIM        MAE    GradMAE
+----------------------------------------------------------------
+Sinc                       28.631  0.92313     39.241   171.4767
+smore_day4_l1              28.904  0.92593     38.028   136.4151
+smore_day4_grad001         28.909  0.92612     38.007   136.0867
+smore_day4_grad005         28.907  0.92616     38.016   136.1026
+smore_day4_grad010         28.904  0.92608     38.030   136.1324
+
+结果 JSON: C:\PROJECTS\MRI_SR\results\day4_metrics.json
+exit code: 0

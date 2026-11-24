@@ -1,0 +1,33 @@
+﻿MRI-SR Day 2 run log
+Generated: 2026-11-23 23:33:19
+Python: C:\Users\Xuanyu Liu\miniconda3\envs\mri\python.exe
+
+===== 1. tests/test_degradation.py (synthetic, unit tests) =====
+PASS  r=1 时退化近似恒等（不下采样、不滤波）
+PASS  r=2 只移除退化轴高频，另外两轴不变
+PASS  Sinc 插值对严格带限信号近似无损（band-limited 恢复）
+PASS  Sinc 插值在偶数->奇数长度（150->75）下无半采样错位
+PASS  逆 FFT 虚部残差在数值精度量级
+PASS  输出尺寸、间距、affine 更新正确
+PASS  metrics: 完全相同图像 PSNR=inf、SSIM=1
+PASS  metrics: 加噪图像 PSNR/SSIM 随噪声增大而下降
+PASS  metrics: 形状不一致时抛出 ValueError
+PASS  非法参数: r<1 / 未知滤波器 / 非法 axis
+
+------------------------------------------------------------
+退化/指标单元测试汇总（合成数组）: 10 passed, 0 failed, 10 total
+exit code: 0
+
+===== 2. scripts/eval_interpolation.py (real IXI T1, r=2 gaussian, axis=R) =====
+处理 IXI002-Guys-0828-T1.nii.gz (axis=R, r=2.0, filter=gaussian)
+  LR shape=[75, 256, 256]  spacing=[2.399994, 0.9375, 0.9375] mm
+  PSNR=28.631 dB  SSIM=0.92313  MSE=1539.8429  mask=3241975 voxels
+处理 IXI012-HH-1211-T1.nii.gz (axis=R, r=2.0, filter=gaussian)
+  LR shape=[75, 256, 256]  spacing=[2.400007, 0.9375, 0.9375] mm
+  PSNR=33.056 dB  SSIM=0.94844  MSE=7809.0249  mask=4232238 voxels
+处理 IXI013-HH-1212-T1.nii.gz (axis=R, r=2.0, filter=gaussian)
+  LR shape=[75, 256, 256]  spacing=[2.399998, 0.9375, 0.9375] mm
+  PSNR=33.777 dB  SSIM=0.94909  MSE=8272.8533  mask=4216289 voxels
+
+指标 JSON 已保存: C:\PROJECTS\MRI_SR\results\day2_metrics.json
+exit code: 0

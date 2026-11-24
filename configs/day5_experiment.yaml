@@ -1,0 +1,48 @@
+# Day 5 正式实验协议（固定受试者划分，可追溯）
+
+degradation:
+  r: 2.0
+  axis: 0                 # canonical RAS+ axis 0 = R（through-plane 低分辨率方向）
+  filter: "gaussian"      # 与 Day 2 退化一致
+
+subjects:
+  # 开发集：用于检查模型、选择 lambda（只用自监督验证损失，不用 HR）
+  dev:
+    - IXI002-Guys-0828-T1
+    - IXI012-HH-1211-T1
+  # 独立测试集：最终性能评价（HR 只在最终评价阶段读取）
+  test:
+    - IXI013-HH-1212-T1
+    - IXI014-HH-1236-T1
+    - IXI015-HH-1258-T1
+    - IXI016-Guys-0697-T1
+    - IXI017-Guys-0698-T1
+    - IXI019-Guys-0702-T1
+    - IXI020-Guys-0700-T1
+    - IXI021-Guys-0703-T1
+
+methods:
+  - sinc          # 传统基线
+  - smore_l1      # SMORE + L1（lambda=0）
+  - smore_grad    # SMORE + L1 + Sobel Gradient（lambda=0.10）
+
+lambda_selection:
+  final_lambda: 0.10
+  note: >
+    开发集（IXI002 各 lambda 自监督 val L1 几乎持平；IXI012 上 lambda=0.10 的
+    val L1 最低 0.001334）。选择是弱/模糊的：梯度损失未显示稳定增益，取最强
+    约束 lambda=0.10 作为代表性“Gradient”方法，测试集不参与选择。
+
+training:
+  batch_size: 16
+  lr: 1.0e-4
+  max_steps: 3000
+  seed: 42
+  patch_size: 32
+  num_workers: 0
+  precision: "fp32"
+
+evaluation:
+  mask: "HR > 0.01*P99.9(HR)，3x3x3 二值腐蚀 x2"
+  data_range: "HR 前景动态范围"
+  metrics: [psnr, ssim, mae, gradient_mae]
