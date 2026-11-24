@@ -1,1 +1,6 @@
 experiment_id,experiment_name,date,research_question,hypothesis,baseline,method,dataset,subject_ids,degradation_ratio,actual_degradation,training_degradation,random_seed,training_steps,psnr,ssim,mae,through_plane_gradient_error,gradient_3d_error,hfen,runtime,peak_gpu_memory,status,decision,conclusion,code_commit
+EXP001,Degradation Operator Alignment Analysis,2026-11-24,训练退化与实际退化是否等价？,两者不等价会限制SMORE,SMORE-L1,数值分析,IXI T1,IXI002,2.0,gaussian+downsample+sinc,gaussian,,,,,,,,,,,completed,DISCARD,真实MRI上近似等价(corr>0.99)，失配可忽略
+EXP002,Multi-View Reconstruction Fusion,2026-11-24,双方向推理融合能否降误差？,双方向互补,SMORE-L1,R-A+R-S平均,IXI T1,IXI002,2.0,gaussian,gaussian,,,28.906,0.92594,,,,,,completed,DISCARD,两方向高度冗余，融合无增益(+0.002dB)
+EXP003,Degradation Mismatch Pilot,2026-11-24,Gaussian模型在Box/Fermi上是否有效？,失配会损害重建,SMORE-L1,零训练评测,IXI T1,IXI002,2.0,gaussian/box/fermi,gaussian,,,,,,,,,,completed,KEEP,失配显著：Box -1.63dB、Fermi -1.24dB（差于Sinc）
+EXP004,Multi-Degradation Robust Training,2026-11-24,多退化训练能否修复失配？,多退化提升鲁棒性,SMORE-L1,多退化自监督训练,IXI T1,IXI002,2.0,gaussian/box/fermi,gaussian+box+fermi(随机),42,3000,,,,,,,,completed,KEEP,修复失配：Box -1.63→≈0，Fermi -1.24→+0.10
+EXP005,Multi-Degradation Cross-Subject Validation,2026-11-24,多退化改善是否跨受试者？,跨受试者一致,SMORE-L1,多退化自监督训练,IXI T1,IXI002/012/013/016,2.0,gaussian/box/fermi,gaussian+box+fermi(随机),42,3000,,,,,,,,completed,KEEP,4受试者一致：失配最差Δ从-1.6~-2.4dB修复到≈0dB
