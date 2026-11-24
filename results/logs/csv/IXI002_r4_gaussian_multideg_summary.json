@@ -1,0 +1,19 @@
+{
+  "experiment": "IXI002_r4_gaussian_multideg",
+  "loss": "l1",
+  "lambda_grad": 0.0,
+  "seed": 42,
+  "scale": 573.34525390625,
+  "max_steps": 3000,
+  "best_val_total": 0.004297550228754213,
+  "best_step": 2000,
+  "train_seconds": 52.35,
+  "peak_gpu_mb": 113.23,
+  "n_params": 592065,
+  "n_train_slices": 120,
+  "n_val_slices": 30,
+  "checkpoint_dir": "results\\checkpoints\\IXI002_r4_gaussian_multideg",
+  "tensorboard_dir": "results\\tensorboard\\IXI002_r4_gaussian_multideg",
+  "train_csv": "results\\logs\\csv\\IXI002_r4_gaussian_multideg_train.csv",
+  "val_csv": "results\\logs\\csv\\IXI002_r4_gaussian_multideg_val.csv"
+}
