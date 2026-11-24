@@ -69,3 +69,12 @@
   残差接近中性（α≈0.5 峰值 +0.08~+0.13）。→ 多退化靠"抑制有害锐化"，失配条件不恢复额外细节。
 - **EXP010（r=4）**：整体 PSNR 降到 ~22.6，SMORE 增益与失配效应都大幅缩小。
   → 多退化鲁棒性价值主要在 r=2。
+
+## 2026-11-24 — EXP012 完整单退化矩阵（关键发现：失配是 Gaussian 特有）
+
+- **结果**：补齐 Fixed-Box/Fixed-Fermi 后，完整矩阵显示只有 Fixed-Gaussian 在
+  Box/Fermi 上大幅下降（-1.6/-1.2 dB）；Fixed-Box（mean +0.284, worst +0.222）与
+  Fixed-Fermi（mean +0.221）天然鲁棒，且**优于 Uniform-Multi（mean +0.171）**。
+- **结论**：失配是 Gaussian 特有；最终方法应为 **SMORE-Fixed-Box**（更简单且更优），
+  多退化不再作为最终方法。
+- **下一步**：更多受试者验证 Fixed-Box 稳健性。
