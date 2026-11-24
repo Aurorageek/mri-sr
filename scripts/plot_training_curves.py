@@ -17,6 +17,7 @@ L1 / Gradient 分项曲线。图中同时标注 lambda 与实验名，只读真�
 from __future__ import annotations
 
 import csv
+import re
 import sys
 from pathlib import Path
 
@@ -34,8 +35,11 @@ OUT_DIR = PROJECT_ROOT / "results" / "figures" / "training_curves"
 def lambda_from_name(name: str) -> float:
     if name.endswith("_l1"):
         return 0.0
-    # day4_grad_010 -> 0.10
-    return int(name.split("_")[-1]) / 100.0
+    # 兼容 "day4_grad_010" 与 "IXI013-HH-1212-T1_grad010"
+    m = re.search(r"grad[_\s]*(\d+)$", name)
+    if m:
+        return int(m.group(1)) / 100.0
+    return float("nan")
 
 
 def load_csv(path: Path) -> dict[str, list[float]]:

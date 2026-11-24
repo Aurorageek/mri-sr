@@ -1,4 +1,4 @@
-# MRI-SR：SMORE 自监督 MRI 超分辨率（Day 1–4）
+# MRI-SR：SMORE 自监督 MRI 超分辨率（Day 1–5）
 
 本项目为医学大数据与人工智能课程项目，研究方向是 MRI 超分辨率重建，
 参考 **SMORE: A Self-Supervised Anti-Aliasing and Super-Resolution Algorithm
@@ -10,7 +10,8 @@ for MRI Using Deep Learning**（IEEE TMI, 2021）的 SMORE(3D) 思路。
 - Day 2：through-plane 各向异性退化 + Sinc 插值 baseline + PSNR/SSIM（已完成）。
 - Day 3：简化 SMORE(3D) 自监督训练 + 推理 + 与 Sinc 对比（已完成）。
 - Day 4：Sobel Gradient Loss、训练曲线记录（TensorBoard/CSV/PNG）、初步消融（已完成）。
-- 尚未开始：多方向集成、SAA 去混叠网络、扩大数据、正式消融。
+- Day 5：多受试者（10 例）正式对比与消融、结构保真分析（已完成）。
+- 尚未开始：多方向集成、SAA 去混叠网络。
 
 ---
 
@@ -511,3 +512,59 @@ tensorboard --logdir .\results\tensorboard --port 6006
 - 重建：`data/processed/IXI002-Guys-0828-T1/*_smore_day4_*.nii.gz`
 - 对比图：`results/figures/comparison/`
 - 指标：`results/day4_metrics.json`
+
+---
+
+## 13. Day 5：多受试者正式对比与消融
+
+### 13.1 实验协议
+
+- **数据**：10 名 IXI T1（`data/raw/ixi/`），开发集 = IXI002/IXI012，测试集 = 8 名
+  （IXI013/014/015/016/017/019/020/021）。划分见 `configs/day5_experiment.yaml`。
+- **退化**：r=2，through-plane 轴 = R（axis 0），gaussian 抗混叠，与 Day 2 一致。
+- **方法**：Sinc、SMORE-L1（λ=0）、SMORE-Grad（λ=0.10，Sobel 梯度损失）。
+- **λ 选择**：开发集上自监督 val L1 无稳定差异（弱/模糊），取最强约束 λ=0.10 为代表。
+- **公平性**：同种子 42、同 3000 步、同 Adam/lr/batch，HR 只在最终评价读取。
+
+### 13.2 正式结果（8 名独立测试受试者，mean ± std，配对 Wilcoxon）
+
+| Method | PSNR (dB) | SSIM | MAE | GradMAE（边缘误差） |
+|---|---:|---:|---:|---:|
+| Sinc | 30.50 ± 2.19 | 0.9291 | 104.0 | 489.96 |
+| SMORE-L1 | 30.81 ± 2.28 | 0.9338 | 100.3 | 375.77 |
+| SMORE-Grad (λ=0.10) | 30.82 ± 2.28 | 0.9340 | 100.2 | 374.94 |
+
+配对差异（Wilcoxon signed-rank，n=8）：
+
+- SMORE-L1 vs Sinc：ΔPSNR **+0.316 dB**（p=0.008），ΔSSIM **+0.0047**（p=0.008），
+  ΔGradMAE **-114.2**（p=0.008，即边缘误差 -23%）→ **显著且一致优于 Sinc**。
+- SMORE-Grad vs SMORE-L1：ΔPSNR +0.007 dB（p=0.016），ΔGradMAE -0.83（p=0.039）
+  → 统计上可检出，但**幅度极小、无实际意义**。
+
+### 13.3 研究结论（诚实）
+
+1. **SMORE（任何变体）显著优于 Sinc**：8/8 受试者 PSNR/SSIM 提升、边缘误差下降，
+   是稳健的结论。
+2. **Sobel 梯度损失没有带来可观的额外增益**：相对纯 L1 仅 +0.007 dB、边缘误差 -0.2%，
+   在 n=8 下虽统计显著，但实际可忽略；与 Day 4 单受试者结论一致。
+3. 未发现改进方法在任一受试者上明显更差的失败案例（Grad 在 8 例中均 ≥ L1 或持平）。
+4. 未声称"梯度损失抑制医学幻觉"；边缘误差仅作为"结构保真代理指标"。
+
+### 13.4 产物
+
+- 指标：`results/metrics/per_subject.csv`、`summary.csv`、`ablation.csv`、`day5_metrics.json`
+- 结构保真图：`results/figures/error_maps/`（切片/绝对误差/梯度误差 + 局部放大）
+- 受试者清单与协议：`configs/day5_experiment.yaml`
+- 训练日志：`results/logs/csv/<subject>_{l1,grad010}_*.csv`、`results/day5_train_log.txt`
+
+### 13.5 复现命令
+
+```powershell
+python scripts/fetch_ixi_partial.py --n 10               # 获取 10 例 IXI T1
+python scripts/eval_interpolation.py --r 2 --axis 0 --filter gaussian   # Day 2 退化
+# 每个受试者训练 L1 与 Grad（λ=0.10），再推理：
+python scripts/train_smore.py --loss l1 --g-path data/processed/<s>/<s>_sinc_r2.nii.gz --experiment-name <s>_l1
+python scripts/train_smore.py --loss l1_grad --lambda-grad 0.10 --g-path data/processed/<s>/<s>_sinc_r2.nii.gz --experiment-name <s>_grad010
+python scripts/eval_multisubject.py --subjects <8 个测试受试者>
+python scripts/analyze_structure.py --subject IXI016-Guys-0697-T1
+```
