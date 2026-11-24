@@ -1,0 +1,191 @@
+{
+  "task": "Day2 through-plane degradation + Sinc interpolation baseline",
+  "params": {
+    "axis": 0,
+    "axis_name": "R",
+    "r": 2.0,
+    "filter": "gaussian"
+  },
+  "subjects": [
+    {
+      "subject": "IXI022-Guys-0701-T1",
+      "raw_path": "C:\\PROJECTS\\MRI_SR\\data\\raw\\ixi\\IXI022-Guys-0701-T1.nii.gz",
+      "canonical_shape": [
+        140,
+        256,
+        256
+      ],
+      "canonical_spacing_mm": [
+        1.199999,
+        0.9375,
+        0.9375
+      ],
+      "axis": 0,
+      "axis_name": "R",
+      "r": 2.0,
+      "filter": "gaussian",
+      "lr_shape": [
+        70,
+        256,
+        256
+      ],
+      "lr_spacing_mm": [
+        2.399998,
+        0.9375,
+        0.9375
+      ],
+      "imag_residual_max": 4.861497213509675e-13,
+      "metrics": {
+        "mse": 12229.014656034251,
+        "psnr_db": 29.603774121879525,
+        "ssim": 0.9171365788606457,
+        "mask_voxels": 4292238
+      },
+      "outputs": {
+        "hr": "data\\processed\\IXI022-Guys-0701-T1\\IXI022-Guys-0701-T1_HR.nii.gz",
+        "lr": "data\\processed\\IXI022-Guys-0701-T1\\IXI022-Guys-0701-T1_LR_r2.nii.gz",
+        "sinc": "data\\processed\\IXI022-Guys-0701-T1\\IXI022-Guys-0701-T1_sinc_r2.nii.gz",
+        "figures": [
+          "results\\figures\\degradation\\IXI022-Guys-0701-T1_coronal_hr_sinc_error.png",
+          "results\\figures\\degradation\\IXI022-Guys-0701-T1_axial_hr_sinc_error.png",
+          "results\\figures\\degradation\\IXI022-Guys-0701-T1_kspace_spectrum.png"
+        ]
+      }
+    },
+    {
+      "subject": "IXI023-Guys-0699-T1",
+      "raw_path": "C:\\PROJECTS\\MRI_SR\\data\\raw\\ixi\\IXI023-Guys-0699-T1.nii.gz",
+      "canonical_shape": [
+        130,
+        256,
+        256
+      ],
+      "canonical_spacing_mm": [
+        1.199999,
+        0.9375,
+        0.9375
+      ],
+      "axis": 0,
+      "axis_name": "R",
+      "r": 2.0,
+      "filter": "gaussian",
+      "lr_shape": [
+        65,
+        256,
+        256
+      ],
+      "lr_spacing_mm": [
+        2.399997,
+        0.9375,
+        0.9375
+      ],
+      "imag_residual_max": 5.500701879565587e-13,
+      "metrics": {
+        "mse": 14015.674479062862,
+        "psnr_db": 28.744882388228696,
+        "ssim": 0.918541850720563,
+        "mask_voxels": 3294473
+      },
+      "outputs": {
+        "hr": "data\\processed\\IXI023-Guys-0699-T1\\IXI023-Guys-0699-T1_HR.nii.gz",
+        "lr": "data\\processed\\IXI023-Guys-0699-T1\\IXI023-Guys-0699-T1_LR_r2.nii.gz",
+        "sinc": "data\\processed\\IXI023-Guys-0699-T1\\IXI023-Guys-0699-T1_sinc_r2.nii.gz",
+        "figures": [
+          "results\\figures\\degradation\\IXI023-Guys-0699-T1_coronal_hr_sinc_error.png",
+          "results\\figures\\degradation\\IXI023-Guys-0699-T1_axial_hr_sinc_error.png",
+          "results\\figures\\degradation\\IXI023-Guys-0699-T1_kspace_spectrum.png"
+        ]
+      }
+    },
+    {
+      "subject": "IXI024-Guys-0705-T1",
+      "raw_path": "C:\\PROJECTS\\MRI_SR\\data\\raw\\ixi\\IXI024-Guys-0705-T1.nii.gz",
+      "canonical_shape": [
+        150,
+        256,
+        256
+      ],
+      "canonical_spacing_mm": [
+        1.199999,
+        0.9375,
+        0.9375
+      ],
+      "axis": 0,
+      "axis_name": "R",
+      "r": 2.0,
+      "filter": "gaussian",
+      "lr_shape": [
+        75,
+        256,
+        256
+      ],
+      "lr_spacing_mm": [
+        2.399998,
+        0.9375,
+        0.9375
+      ],
+      "imag_residual_max": 6.273643355824512e-13,
+      "metrics": {
+        "mse": 15232.319837742461,
+        "psnr_db": 28.146558928713116,
+        "ssim": 0.9154024851810085,
+        "mask_voxels": 3505619
+      },
+      "outputs": {
+        "hr": "data\\processed\\IXI024-Guys-0705-T1\\IXI024-Guys-0705-T1_HR.nii.gz",
+        "lr": "data\\processed\\IXI024-Guys-0705-T1\\IXI024-Guys-0705-T1_LR_r2.nii.gz",
+        "sinc": "data\\processed\\IXI024-Guys-0705-T1\\IXI024-Guys-0705-T1_sinc_r2.nii.gz",
+        "figures": [
+          "results\\figures\\degradation\\IXI024-Guys-0705-T1_coronal_hr_sinc_error.png",
+          "results\\figures\\degradation\\IXI024-Guys-0705-T1_axial_hr_sinc_error.png",
+          "results\\figures\\degradation\\IXI024-Guys-0705-T1_kspace_spectrum.png"
+        ]
+      }
+    },
+    {
+      "subject": "IXI025-Guys-0852-T1",
+      "raw_path": "C:\\PROJECTS\\MRI_SR\\data\\raw\\ixi\\IXI025-Guys-0852-T1.nii.gz",
+      "canonical_shape": [
+        150,
+        256,
+        256
+      ],
+      "canonical_spacing_mm": [
+        1.199996,
+        0.9375,
+        0.9375
+      ],
+      "axis": 0,
+      "axis_name": "R",
+      "r": 2.0,
+      "filter": "gaussian",
+      "lr_shape": [
+        75,
+        256,
+        256
+      ],
+      "lr_spacing_mm": [
+        2.399991,
+        0.9375,
+        0.9375
+      ],
+      "imag_residual_max": 1.9430137860922888e-13,
+      "metrics": {
+        "mse": 1331.6972329047162,
+        "psnr_db": 28.919428706748683,
+        "ssim": 0.9199095912323233,
+        "mask_voxels": 3618086
+      },
+      "outputs": {
+        "hr": "data\\processed\\IXI025-Guys-0852-T1\\IXI025-Guys-0852-T1_HR.nii.gz",
+        "lr": "data\\processed\\IXI025-Guys-0852-T1\\IXI025-Guys-0852-T1_LR_r2.nii.gz",
+        "sinc": "data\\processed\\IXI025-Guys-0852-T1\\IXI025-Guys-0852-T1_sinc_r2.nii.gz",
+        "figures": [
+          "results\\figures\\degradation\\IXI025-Guys-0852-T1_coronal_hr_sinc_error.png",
+          "results\\figures\\degradation\\IXI025-Guys-0852-T1_axial_hr_sinc_error.png",
+          "results\\figures\\degradation\\IXI025-Guys-0852-T1_kspace_spectrum.png"
+        ]
+      }
+    }
+  ]
+}

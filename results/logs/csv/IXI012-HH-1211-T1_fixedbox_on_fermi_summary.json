@@ -1,0 +1,19 @@
+{
+  "experiment": "IXI012-HH-1211-T1_fixedbox_on_fermi",
+  "loss": "l1",
+  "lambda_grad": 0.0,
+  "seed": 42,
+  "scale": 1807.1111206054675,
+  "max_steps": 3000,
+  "best_val_total": 0.007251779177264931,
+  "best_step": 1400,
+  "train_seconds": 51.37,
+  "peak_gpu_mb": 113.23,
+  "n_params": 592065,
+  "n_train_slices": 120,
+  "n_val_slices": 30,
+  "checkpoint_dir": "results\\checkpoints\\IXI012-HH-1211-T1_fixedbox_on_fermi",
+  "tensorboard_dir": "results\\tensorboard\\IXI012-HH-1211-T1_fixedbox_on_fermi",
+  "train_csv": "results\\logs\\csv\\IXI012-HH-1211-T1_fixedbox_on_fermi_train.csv",
+  "val_csv": "results\\logs\\csv\\IXI012-HH-1211-T1_fixedbox_on_fermi_val.csv"
+}

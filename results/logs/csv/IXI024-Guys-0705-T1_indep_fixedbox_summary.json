@@ -1,0 +1,19 @@
+{
+  "experiment": "IXI024-Guys-0705-T1_indep_fixedbox",
+  "loss": "l1",
+  "lambda_grad": 0.0,
+  "seed": 42,
+  "scale": 1907.9531579589834,
+  "max_steps": 3000,
+  "best_val_total": 0.006153098901268095,
+  "best_step": 2600,
+  "train_seconds": 50.84,
+  "peak_gpu_mb": 113.23,
+  "n_params": 592065,
+  "n_train_slices": 120,
+  "n_val_slices": 30,
+  "checkpoint_dir": "results\\checkpoints\\IXI024-Guys-0705-T1_indep_fixedbox",
+  "tensorboard_dir": "results\\tensorboard\\IXI024-Guys-0705-T1_indep_fixedbox",
+  "train_csv": "results\\logs\\csv\\IXI024-Guys-0705-T1_indep_fixedbox_train.csv",
+  "val_csv": "results\\logs\\csv\\IXI024-Guys-0705-T1_indep_fixedbox_val.csv"
+}

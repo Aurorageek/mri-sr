@@ -1,37 +1,47 @@
 # 当前最佳方法
 
-> 截至 EXP004：**多退化自监督训练（SMORE-L1 + Multi-Degradation）** 是当前最有
-> 价值的方法（提升鲁棒性，待多受试者验证）。
+> 最终方法（Phase 3 冻结）：**SMORE-Fixed-Box**。
 
 ## 方法
 
-在 SMORE 自监督训练时，从 {Gaussian, Box, Fermi} 随机采样退化核构造训练输入，
-让网络学习恢复多种 MRI 退化，而非固定单一退化。
+自监督训练时用 **Box（理想矩形截断）低通核**构造 in-plane 训练退化（而非默认的
+Gaussian），网络结构、训练预算、推理方式均不变。
 
-## 与 Baseline 的区别
+## 与 SMORE Baseline 的区别
 
-Baseline（SMORE-L1）用固定 Gaussian 退化；改进版在训练时随机采样多种退化，
-推理时不改变网络结构、不改变计算开销。
+基线用 Gaussian 模糊核构造自监督训练对；本方法改用 Box 核。
+无额外参数、无额外推理开销、无需退化估计或多退化采样。
 
-## 当前证据（EXP004，IXI002 单开发受试者）
+## 证据
 
-- 修复退化失配：Box 条件从 -1.63 dB（低于 Sinc）→ ≈0；Fermi 从 -1.24 → +0.10。
-- Gaussian 条件反而略升：+0.27 → +0.41 dB。
-- 训练/推理开销与 Baseline 相同（无新增参数量）。
+**开发集（4 受试者 × 3 条件）**：平均 ΔPSNR **+0.244 dB**，最差 **+0.140 dB**，12/12 为正。
+
+**独立测试（4 名全新受试者 × 3 条件）**：
+
+| 方法 | mean ΔPSNR | worst | 优于 Sinc 比例 |
+|---|---:|---:|---:|
+| Fixed-Gaussian | -0.904 | -1.811 | 4/12 |
+| **Fixed-Box** | **+0.244** | **+0.062** | **12/12** |
+
+- 匹配条件（Gaussian）：Fixed-G +0.26 略优于 Fixed-Box +0.17。
+- 失配条件（Box/Fermi）：Fixed-Box 全部为正，Fixed-G 全部大幅为负。
 
 ## 复现命令
 
 ```powershell
-python scripts/train_smore.py --loss l1 --g-path data/processed/<s>/<s>_sinc_r2.nii.gz \
-    --filters gaussian box fermi --experiment-name <s>_multideg
+python scripts/train_smore.py --loss l1 \
+    --g-path data/processed/<subject>/<subject>_sinc_r2.nii.gz \
+    --filters box --experiment-name <subject>_indep_fixedbox
+python improvements/scripts/eval_independent_robustness.py
 ```
 
 ## 已知局限
 
-- 仅 IXI002 单受试者验证，需扩展。
-- 未测试 r=4、更多退化类型（噪声、不同截止频率）。
+- 仅 r=2 有明确收益；r=4 增益消失。
+- 机制（Box 更易迁移）为假设，未理论证明。
+- 独立测试仅 4 名受试者。
 
-## 历史最佳（被替代）
+## 被替代的历史方案
 
-- SMORE-L1（固定 Gaussian）：PSNR 30.81 vs Sinc 30.50，8 受试者，但失配条件下
-  会损害重建（EXP003 发现）。
+- SMORE-Uniform-Multi（Phase 2）：mean +0.171（开发集），差于 Fixed-Box。
+- SMORE-Fixed-Gaussian：仅在匹配条件有效，失配时严重下降。

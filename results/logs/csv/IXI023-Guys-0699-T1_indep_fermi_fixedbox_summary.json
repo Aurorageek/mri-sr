@@ -1,0 +1,19 @@
+{
+  "experiment": "IXI023-Guys-0699-T1_indep_fermi_fixedbox",
+  "loss": "l1",
+  "lambda_grad": 0.0,
+  "seed": 42,
+  "scale": 1905.4050360107422,
+  "max_steps": 3000,
+  "best_val_total": 0.006759014925382172,
+  "best_step": 3000,
+  "train_seconds": 50.24,
+  "peak_gpu_mb": 113.23,
+  "n_params": 592065,
+  "n_train_slices": 104,
+  "n_val_slices": 26,
+  "checkpoint_dir": "results\\checkpoints\\IXI023-Guys-0699-T1_indep_fermi_fixedbox",
+  "tensorboard_dir": "results\\tensorboard\\IXI023-Guys-0699-T1_indep_fermi_fixedbox",
+  "train_csv": "results\\logs\\csv\\IXI023-Guys-0699-T1_indep_fermi_fixedbox_train.csv",
+  "val_csv": "results\\logs\\csv\\IXI023-Guys-0699-T1_indep_fermi_fixedbox_val.csv"
+}
