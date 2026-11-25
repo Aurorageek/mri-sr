@@ -1,0 +1,19 @@
+{
+  "experiment": "IXI013-HH-1212-T1_paperaligned",
+  "loss": "l1",
+  "lambda_grad": 0.0,
+  "seed": 42,
+  "scale": 1635.9569812011737,
+  "max_steps": 3000,
+  "best_val_total": 0.007463604345684871,
+  "best_step": 2400,
+  "train_seconds": 52.79,
+  "peak_gpu_mb": 113.23,
+  "n_params": 592065,
+  "n_train_slices": 120,
+  "n_val_slices": 30,
+  "checkpoint_dir": "results\\checkpoints\\IXI013-HH-1212-T1_paperaligned",
+  "tensorboard_dir": "results\\tensorboard\\IXI013-HH-1212-T1_paperaligned",
+  "train_csv": "results\\logs\\csv\\IXI013-HH-1212-T1_paperaligned_train.csv",
+  "val_csv": "results\\logs\\csv\\IXI013-HH-1212-T1_paperaligned_val.csv"
+}

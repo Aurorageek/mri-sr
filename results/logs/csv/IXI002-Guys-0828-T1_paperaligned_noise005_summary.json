@@ -1,0 +1,19 @@
+{
+  "experiment": "IXI002-Guys-0828-T1_paperaligned_noise005",
+  "loss": "l1",
+  "lambda_grad": 0.0,
+  "seed": 42,
+  "scale": 595.06404083252,
+  "max_steps": 3000,
+  "best_val_total": 0.013086719911855955,
+  "best_step": 3000,
+  "train_seconds": 55.94,
+  "peak_gpu_mb": 113.23,
+  "n_params": 592065,
+  "n_train_slices": 120,
+  "n_val_slices": 30,
+  "checkpoint_dir": "results\\checkpoints\\IXI002-Guys-0828-T1_paperaligned_noise005",
+  "tensorboard_dir": "results\\tensorboard\\IXI002-Guys-0828-T1_paperaligned_noise005",
+  "train_csv": "results\\logs\\csv\\IXI002-Guys-0828-T1_paperaligned_noise005_train.csv",
+  "val_csv": "results\\logs\\csv\\IXI002-Guys-0828-T1_paperaligned_noise005_val.csv"
+}

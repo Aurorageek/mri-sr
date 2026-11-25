@@ -1,41 +1,39 @@
 # 当前研究状态
 
-> 更新日期：2026-11-24（Phase 3 结束）
+> 更新日期：2026-11-24（Phase 4 结束）
 
 ## 当前阶段
 
-Phase 3 完成：已冻结最终方法并完成独立受试者验证。
+Phase 4 完成：原论文对齐基线 + 跨平面可靠性假设验证 + 备选噪声鲁棒方向。
 
 ## 核心结论
 
-1. **退化失配是 Gaussian 特有的**：Fixed-Gaussian SMORE 在 Box/Fermi 上比 Sinc 低
-   1.2–1.8 dB；Fixed-Box / Fixed-Fermi 天然鲁棒。
-2. **多退化不是必要的**：Uniform-Multi（+0.171）差于 Fixed-Box（+0.284）。
-3. **自适应退化估计不可行**：三种退化频谱 corr > 0.99999。
-4. **最终方法 Fixed-Box**：开发集 +0.244（worst +0.140），独立测试 +0.244
-   （worst +0.062），12/12 为正。
+1. **原论文对齐退化很重要**：rect×Fermi 下 SMORE 单方向增益 +0.78~1.02 dB，
+   远大于 Gaussian 模拟的 +0.24~0.41 dB。
+2. **跨平面分歧**：能反映误差大小（ρ≈0.30–0.35，偏相关 0.22–0.26），
+   **不能**识别有害修正（ρ≈0–0.1）。
+3. **RG-SMORE 失败（DISCARD）**：劣于 Average/FBA 与能量匹配固定缩放；
+   门控削弱了残差与真实残差的对齐。
+4. **M=2 平均/FBA 仅略优于单方向**（+0.003~0.016 dB），但稳定。
+5. **噪声鲁棒（KEEP）**：干净训练 SMORE 在噪声下低于 Sinc；噪声增强训练
+   （σ=0.02/0.05）以近零/小代价修复。
 
 ## 当前最佳方法
 
-`SMORE-Fixed-Box`（见 `BEST_METHOD.md`）。
+Paper-Aligned SMORE + M=2 平均/FBA（+ 可选噪声增强）。见 `BEST_METHOD.md`。
 
 ## 已淘汰方案
 
-- Sobel Gradient Loss（冗余）
-- 退化对齐训练（失配可忽略）
-- 多方向平均融合（冗余）
-- Uniform-Multi（差于 Fixed-Box）
-- 自适应退化采样（无可估计信号）
-- r=6 扩展（r=4 收益已很小）
+Sobel loss、退化对齐、多方向平均（Phase 2 结论）、Uniform-Multi、自适应采样、
+Fixed-Box（协议变更后）、**RG-SMORE**。
 
-## 尚未完成 / 下一步
+## 下一步
 
-1. 独立测试扩到 8–10 名以获得统计功效。
-2. 补充完整 SSIM/梯度指标表与置信区间。
-3. 英文论文正文（素材见 `reports/PAPER_EXPERIMENTS.md`）。
+1. 噪声鲁棒方法在 8–10 名新受试者上验证（当前 2 名）。
+2. 完整指标表（SSIM/梯度）与统计检验。
+3. 英文论文正文；正式写作前补查"分歧引导 SR"相关文献。
 
-## 最近一次 GitHub 更新
+## 最近 GitHub
 
-- 分支：`research/mri-sr-improvements`
-- 地址：https://github.com/Aurorageek/mri-sr/tree/research/mri-sr-improvements
-- 本轮报告：`improvements/reports/PHASE3_REPORT.md`
+- 分支 `research/mri-sr-improvements`；报告 `PAPER_EXPERIMENTS.md`、
+  `PHASE4_REPORT.md`。

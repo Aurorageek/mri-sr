@@ -1,47 +1,43 @@
 # 当前最佳方法
 
-> 最终方法（Phase 3 冻结）：**SMORE-Fixed-Box**。
+> 更新（Phase 4）：**Paper-Aligned SMORE + M=2 平均/FBA（+ 可选噪声增强）**。
 
-## 方法
+## 组成
 
-自监督训练时用 **Box（理想矩形截断）低通核**构造 in-plane 训练退化（而非默认的
-Gaussian），网络结构、训练预算、推理方式均不变。
+1. **退化模型**：SMORE Eq.(1) `H(u;r)=rect(r·u)·Fermi(u;r)`（`filter="paper"`）。
+   paper 对齐退化下，单方向 SMORE 相对 Sinc 提升 **+0.78~+1.02 dB**（4 受试者）。
+2. **多方向融合**：M=2（R-A 与 R-S 推理）取平均或 FBA；相对单方向仅 +0.003~+0.016 dB
+   （两方向高度相关），但稳定不为负。
+3. **噪声鲁棒（可选）**：训练输入加 Rician 噪声 σ=0.02（近零干净代价）或 0.05
+   （高噪声更强）。干净训练的 SMORE 在噪声下会低于 Sinc。
 
-## 与 SMORE Baseline 的区别
+## 明确不采用
 
-基线用 Gaussian 模糊核构造自监督训练对；本方法改用 Box 核。
-无额外参数、无额外推理开销、无需退化估计或多退化采样。
+- **RG-SMORE（可靠性门控）**：EXP018 负结果，劣于平均与能量匹配固定缩放。
+- **Sobel Gradient Loss**：与 L1 冗余（且与 iSMORE 重叠，非原创）。
+- **Uniform-Multi / 自适应退化采样**：Phase 2/3 已证伪。
 
 ## 证据
 
-**开发集（4 受试者 × 3 条件）**：平均 ΔPSNR **+0.244 dB**，最差 **+0.140 dB**，12/12 为正。
+- paper-aligned 单方向 vs Sinc：+0.78/+0.91/+1.02/+0.89 dB（IXI002/012/013/022）。
+- M=2 Average/FBA：29.675/34.179/35.047/30.526 dB（单方向 29.659/34.171/35.040/30.521）。
+- 噪声：见 `experiments/EXP019/analysis.md`。
 
-**独立测试（4 名全新受试者 × 3 条件）**：
-
-| 方法 | mean ΔPSNR | worst | 优于 Sinc 比例 |
-|---|---:|---:|---:|
-| Fixed-Gaussian | -0.904 | -1.811 | 4/12 |
-| **Fixed-Box** | **+0.244** | **+0.062** | **12/12** |
-
-- 匹配条件（Gaussian）：Fixed-G +0.26 略优于 Fixed-Box +0.17。
-- 失配条件（Box/Fermi）：Fixed-Box 全部为正，Fixed-G 全部大幅为负。
-
-## 复现命令
+## 复现
 
 ```powershell
-python scripts/train_smore.py --loss l1 \
-    --g-path data/processed/<subject>/<subject>_sinc_r2.nii.gz \
-    --filters box --experiment-name <subject>_indep_fixedbox
-python improvements/scripts/eval_independent_robustness.py
+python improvements/scripts/generate_lr.py --subject IXI002-Guys-0828-T1 --filter paper
+python scripts/train_smore.py --loss l1 --g-path data/processed/IXI002-Guys-0828-T1/IXI002-Guys-0828-T1_sinc_r2_paper.nii.gz --filters paper --experiment-name IXI002_paperaligned
+python improvements/scripts/reliability_guided.py   # 含 Average/FBA 对照
 ```
 
-## 已知局限
+## 局限
 
-- 仅 r=2 有明确收益；r=4 增益消失。
-- 机制（Box 更易迁移）为假设，未理论证明。
-- 独立测试仅 4 名受试者。
+- 仅 r=2；独立验证受试者有限。
+- 旋转增强（原论文 7 角度）未复现。
+- 噪声方法仅 2 名受试者 pilot。
 
-## 被替代的历史方案
+## 历史方法（已被替代）
 
-- SMORE-Uniform-Multi（Phase 2）：mean +0.171（开发集），差于 Fixed-Box。
-- SMORE-Fixed-Gaussian：仅在匹配条件有效，失配时严重下降。
+- SMORE-Fixed-Box（Phase 3，Gaussian 模拟协议下）：mean +0.244 dB，12/12 为正。
+  在 paper 对齐协议下未重测，不再作为首选。

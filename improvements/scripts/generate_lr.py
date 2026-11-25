@@ -28,7 +28,7 @@ from src.degradation import degrade_through_plane, sinc_interpolate
 def parse_args(argv=None):
     p = argparse.ArgumentParser(description="生成指定滤波器的实际 LR")
     p.add_argument("--subject", default="IXI002-Guys-0828-T1")
-    p.add_argument("--filter", default="box", choices=["gaussian", "box", "fermi"])
+    p.add_argument("--filter", default="box", choices=["gaussian", "box", "fermi", "paper"])
     p.add_argument("--r", type=float, default=2.0)
     return p.parse_args(argv)
 

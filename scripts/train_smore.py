@@ -173,10 +173,12 @@ def stage_b_train(cfg: dict, args, device: torch.device) -> dict:
 
     train_ds = SMOREDataset(g_path, r=r, filter_name=filter_name, patch_size=patch_size,
                             patches_per_slice=patches_per_slice, mode="train",
-                            val_interval=val_interval, seed=seed, scale=scale)
+                            val_interval=val_interval, seed=seed, scale=scale,
+                            noise_sigma=args.noise_sigma)
     val_ds = SMOREDataset(g_path, r=r, filter_name=filter_name, patch_size=patch_size,
                           patches_per_slice=patches_per_slice, mode="val",
-                          val_interval=val_interval, seed=seed, scale=scale)
+                          val_interval=val_interval, seed=seed, scale=scale,
+                          noise_sigma=args.noise_sigma)
 
     train_loader = torch.utils.data.DataLoader(
         train_ds, batch_size=batch_size, shuffle=True, num_workers=num_workers,
@@ -315,6 +317,7 @@ def parse_args(argv=None) -> argparse.Namespace:
     p.add_argument("--seed", type=int, default=None)
     p.add_argument("--g-path", default=None, help="覆盖 config 里的 data.g_path（多受试者）")
     p.add_argument("--filters", nargs="*", default=None, help="多退化训练：滤波器列表，如 --filters gaussian box fermi")
+    p.add_argument("--noise-sigma", type=float, default=0.0, help="训练输入加 Rician 噪声（归一化强度单位）")
     return p.parse_args(argv)
 
 

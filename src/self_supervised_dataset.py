@@ -70,6 +70,7 @@ class SMOREDataset(Dataset):
         val_interval: int = 5,
         seed: int = 0,
         scale: float | None = None,
+        noise_sigma: float = 0.0,
     ):
         if patch_size <= 0 or patch_size % 2 != 0:
             raise ValueError(f"patch_size 必须是正偶数，得到 {patch_size}")
@@ -91,6 +92,7 @@ class SMOREDataset(Dataset):
         self.scale = scale if scale is not None else _foreground_scale(g)
         self.mode = mode
         self.seed = seed
+        self.noise_sigma = float(noise_sigma)
 
         # 归一化整个体数据（训练与推理使用同一个 scale）
         g_norm = (g / self.scale).astype(np.float32)
@@ -160,6 +162,11 @@ class SMOREDataset(Dataset):
         inp = self._crop_patch(inp_full, i0, j0)
         tgt = self._crop_patch(self.targets[slice_i], i0, j0)
         inp, tgt = self._augment(inp, tgt)
+        if self.noise_sigma > 0:
+            # Rician 噪声：在 I/Q 两路加独立高斯噪声后取模
+            n1 = self._rng.standard_normal(inp.shape) * self.noise_sigma
+            n2 = self._rng.standard_normal(inp.shape) * self.noise_sigma
+            inp = np.sqrt((inp + n1) ** 2 + n2 ** 2).astype(np.float32)
         x = torch.from_numpy(inp[None, ...].copy())   # [1,H,W]
         y = torch.from_numpy(tgt[None, ...].copy())   # [1,H,W]
         return x, y

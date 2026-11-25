@@ -50,7 +50,7 @@ from typing import Dict, Sequence, Tuple
 
 import numpy as np
 
-SUPPORTED_FILTERS = ("gaussian", "box", "fermi")
+SUPPORTED_FILTERS = ("gaussian", "box", "fermi", "paper")
 
 
 def _centered_freq(n: int, spacing: float = 1.0) -> np.ndarray:
@@ -70,7 +70,9 @@ def _lowpass_mask(n: int, r: float, filter_name: str) -> np.ndarray:
         该轴的体素数。
     r : float
         退化因子。f_cut = 0.5 / r cycles/voxel（Nyquist 除以 r）。
-    filter_name : {"gaussian", "box", "fermi"}
+    filter_name : {"gaussian", "box", "fermi", "paper"}
+        ``"paper"`` 即 SMORE (TMI 2021) 式 (1) 的 ``rect(r·u) × Fermi(u;r)``：
+        ``Fermi(u;r)=1/(1+exp((|u|-1/(2r))/(10/L)))``，L 为该轴图像尺寸。
     """
     if filter_name not in SUPPORTED_FILTERS:
         raise ValueError(f"未知滤波器 {filter_name!r}，可选 {SUPPORTED_FILTERS}")
@@ -83,6 +85,13 @@ def _lowpass_mask(n: int, r: float, filter_name: str) -> np.ndarray:
     if filter_name == "gaussian":
         # 半功率点位于 f_cut
         return np.exp(-np.log(2.0) * (f / f_cut) ** 2)
+    if filter_name == "paper":
+        # SMORE 式 (1): rect(r u) * Fermi(u; r), 过渡带宽 10/L (L = 该轴长度)
+        width = 10.0 / n
+        z = (np.abs(f) - f_cut) / width
+        fermi = 1.0 / (1.0 + np.exp(np.clip(z, -60.0, 60.0)))
+        rect = (np.abs(f) <= f_cut).astype(np.float64)
+        return rect * fermi
     # fermi
     width = max(0.5 / n, 0.01)  # 过渡带宽与网格分辨率同量级
     return 1.0 / (1.0 + np.exp((np.abs(f) - f_cut) / width))

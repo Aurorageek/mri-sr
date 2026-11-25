@@ -1,0 +1,154 @@
+[
+  {
+    "subject": "IXI002-Guys-0828-T1",
+    "mask_voxels": 3241975,
+    "spearman_U_Errm": [
+      0.3474426920352203,
+      0.0
+    ],
+    "spearman_U_Harmful": [
+      0.014180898800172188,
+      8.127067315472659e-144
+    ],
+    "spearman_U_EA": 0.3491751662334998,
+    "spearman_U_EB": 0.3467386441815531,
+    "spearman_U_grad": 0.5564745731044982,
+    "spearman_U_var": 0.7330617539661043,
+    "spearman_U_resid": 0.5458889262195536,
+    "partial_U_Errm_grad": 0.25665497143364163,
+    "partial_U_Errm_var": 0.2142167508004279,
+    "partial_U_Errm_resid": 0.20891929444927215,
+    "error_by_U_decile": [
+      11.514210063420315,
+      12.915872617886107,
+      14.582401938664598,
+      16.925951284550706,
+      20.243434924877857,
+      23.916394819873222,
+      27.39623271602277,
+      31.0858971982019,
+      35.31608160025978,
+      41.290132042820986
+    ],
+    "harmful_voxel_ratio": 0.42576084022856436,
+    "harmful_mag_ratio": 0.06142230609952165,
+    "figures": [
+      "improvements\\figures\\phase4\\IXI002-Guys-0828-T1_disagreement_maps.png",
+      "improvements\\figures\\phase4\\IXI002-Guys-0828-T1_disagreement_stats.png"
+    ]
+  },
+  {
+    "subject": "IXI012-HH-1211-T1",
+    "mask_voxels": 4232238,
+    "spearman_U_Errm": [
+      0.32200030791336753,
+      0.0
+    ],
+    "spearman_U_Harmful": [
+      0.003410971699057783,
+      2.2634704218138902e-12
+    ],
+    "spearman_U_EA": 0.32258176908493713,
+    "spearman_U_EB": 0.32203546043931514,
+    "spearman_U_grad": 0.5920048902543384,
+    "spearman_U_var": 0.748063377608111,
+    "spearman_U_resid": 0.5616268887726006,
+    "partial_U_Errm_grad": 0.2299191742270432,
+    "partial_U_Errm_var": 0.18282699286430512,
+    "partial_U_Errm_resid": 0.19472932815623215,
+    "error_by_U_decile": [
+      29.568238861332826,
+      32.73125579578517,
+      36.870771357810774,
+      41.74926557375756,
+      47.51691318046253,
+      54.33071403036886,
+      61.502087731008615,
+      69.2953520941492,
+      77.96116382262777,
+      92.54525835101383
+    ],
+    "harmful_voxel_ratio": 0.3996292269007556,
+    "harmful_mag_ratio": 0.06050424398218334,
+    "figures": [
+      "improvements\\figures\\phase4\\IXI012-HH-1211-T1_disagreement_maps.png",
+      "improvements\\figures\\phase4\\IXI012-HH-1211-T1_disagreement_stats.png"
+    ]
+  },
+  {
+    "subject": "IXI013-HH-1212-T1",
+    "mask_voxels": 4216289,
+    "spearman_U_Errm": [
+      0.2986012312961472,
+      0.0
+    ],
+    "spearman_U_Harmful": [
+      0.02738548894304592,
+      0.0
+    ],
+    "spearman_U_EA": 0.29905449778421367,
+    "spearman_U_EB": 0.29889753421691395,
+    "spearman_U_grad": 0.5700586101101682,
+    "spearman_U_var": 0.7317024247563972,
+    "spearman_U_resid": 0.5047509408353664,
+    "partial_U_Errm_grad": 0.2194480235950615,
+    "partial_U_Errm_var": 0.16777376086076806,
+    "partial_U_Errm_resid": 0.1871975632926844,
+    "error_by_U_decile": [
+      29.594186646278153,
+      32.75007061816335,
+      39.24202820471492,
+      46.678985023798006,
+      53.38746011460543,
+      59.22309371484386,
+      64.10334194544002,
+      68.92937549242617,
+      74.7433678623066,
+      86.30350999192491
+    ],
+    "harmful_voxel_ratio": 0.37579183969599805,
+    "harmful_mag_ratio": 0.0608087921694674,
+    "figures": [
+      "improvements\\figures\\phase4\\IXI013-HH-1212-T1_disagreement_maps.png",
+      "improvements\\figures\\phase4\\IXI013-HH-1212-T1_disagreement_stats.png"
+    ]
+  },
+  {
+    "subject": "IXI022-Guys-0701-T1",
+    "mask_voxels": 4292238,
+    "spearman_U_Errm": [
+      0.3070803667870646,
+      0.0
+    ],
+    "spearman_U_Harmful": [
+      0.09835669467176854,
+      0.0
+    ],
+    "spearman_U_EA": 0.30785216987106323,
+    "spearman_U_EB": 0.307101562136953,
+    "spearman_U_grad": 0.5480009755099642,
+    "spearman_U_var": 0.6828684703308149,
+    "spearman_U_resid": 0.4873614237465139,
+    "partial_U_Errm_grad": 0.22751526860540996,
+    "partial_U_Errm_var": 0.19594615427749704,
+    "partial_U_Errm_resid": 0.20752092486250087,
+    "error_by_U_decile": [
+      38.394825482100515,
+      44.99348434974627,
+      49.91882668285102,
+      55.031381805951206,
+      61.516817130369276,
+      69.09864876347152,
+      77.38748142499502,
+      86.3421162335064,
+      98.5601646462424,
+      116.00151108773252
+    ],
+    "harmful_voxel_ratio": 0.3546848986472791,
+    "harmful_mag_ratio": 0.060941338897213704,
+    "figures": [
+      "improvements\\figures\\phase4\\IXI022-Guys-0701-T1_disagreement_maps.png",
+      "improvements\\figures\\phase4\\IXI022-Guys-0701-T1_disagreement_stats.png"
+    ]
+  }
+]

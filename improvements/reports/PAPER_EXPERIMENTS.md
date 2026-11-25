@@ -103,3 +103,70 @@ Sinc interpolation across Gaussian/Box/Fermi conditions, with no extra computati
 - Feature feasibility: `improvements/experiments/EXP014/analysis.md`
 - Independent test: `improvements/experiments/EXP015/analysis.md`
 - Figures: `improvements/figures/paper/`
+
+---
+
+# Phase 4 additions (paper-aligned degradation, cross-plane reliability, noise)
+
+> Status: negative result for reliability gating; positive robustness finding.
+> The core method description above is unchanged.
+
+## Paper-aligned degradation
+
+SMORE Eq. (1): `H(u;r)=rect(r·u)·Fermi(u;r)`, `Fermi=1/(1+exp((|u|−1/(2r))/(10/L)))`.
+Implemented as `filter="paper"`; unit-tested (4/4).
+
+**Key result**: with paper-aligned degradation, single-view SMORE improves over Sinc by
+**+0.78/+0.91/+1.02/+0.89 dB** (IXI002/012/013/022) — substantially larger than the
++0.24–0.41 dB obtained under the Gaussian simulation. The reported SR gain is highly
+sensitive to the simulated degradation model.
+
+## Cross-plane disagreement
+
+- ρ(U, |X_mean−HR|) = 0.30–0.35 (4 subjects, monotone by decile).
+- Partial ρ ≈ 0.22–0.26 after controlling gradient/local variance/residual amplitude.
+- ρ(U, harmful correction) ≈ 0.00–0.10 → disagreement does **not** identify where SR is
+  worse than Sinc.
+
+## Reliability-guided gating (negative result)
+
+PSNR (dB), paper-aligned, r=2:
+
+| Subject | Average | FBA | RG-τ0.5 | Fixed-α (energy-matched) |
+|---|---:|---:|---:|---:|
+| IXI002 | 29.675 | 29.683 | 29.146 | 29.204 |
+| IXI012 | 34.179 | 34.187 | 33.559 | 33.609 |
+| IXI013 | 35.047 | 35.054 | 34.367 | 34.416 |
+| IXI022 | 30.526 | 30.535 | 29.938 | 29.977 |
+
+RG is worse than the energy-matched fixed scaling in every subject; residual correlation
+drops from 0.49–0.54 (fixed scaling) to 0.41–0.47 (RG). Gating suppresses beneficial
+residual rather than harmful residual.
+
+## Noise robustness (positive)
+
+Clean-trained SMORE falls below Sinc under Rician noise (e.g., σ=0.05: 29.51 vs 30.27 on
+IXI012). Noise-augmented self-supervised training:
+
+| σ_eval | IXI002 clean | IXI002 n002 | IXI002 n005 | IXI012 clean | IXI012 n002 | IXI012 n005 |
+|---|---:|---:|---:|---:|---:|---:|
+| 0.00 | 29.660 | 29.628 | 28.787 | 34.171 | 33.939 | 32.473 |
+| 0.05 | 26.375 | 28.515 | 28.455 | 29.507 | 32.331 | 32.243 |
+| 0.10 | 22.247 | 25.775 | 26.882 | 24.779 | 28.732 | 30.227 |
+| 0.20 | 16.988 | 20.693 | 22.250 | 19.282 | 22.988 | 24.790 |
+
+σ_train=0.02: near-zero clean cost (−0.03/−0.23 dB), +2.1/+2.8 dB at σ=0.05.
+σ_train=0.05: stronger at high noise, costs 0.9–1.7 dB clean.
+
+## Figures
+
+- `improvements/figures/phase4/fig_rg_vs_controls.png`
+- `improvements/figures/phase4/noise_robustness_IXI002.png`
+- `improvements/figures/phase4/noise_robustness_IXI012.png`
+- `improvements/figures/phase4/*_disagreement_maps.png`、`*_disagreement_stats.png`
+
+## Sources (Phase 4)
+
+- Paper equations: PMC8053388 (verified full text snippets).
+- EXP016–019: `improvements/experiments/EXP0{16..19}/analysis.md`
+- Report: `improvements/reports/PHASE4_REPORT.md`
